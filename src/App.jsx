@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './layout/layout.jsx';
-import PageLoader from './components/PageLoader';
+import PageLoader from './components/Pageloader';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
