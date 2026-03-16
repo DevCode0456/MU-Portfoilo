@@ -1,8 +1,7 @@
 // src/pages/Contact.jsx
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import Spline from "@splinetool/react-spline";
 import { contactInfo, faqs, splineScenes } from "../data/portfolioData";
 import {
   FiMail,
@@ -15,6 +14,11 @@ import {
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaUpwork } from "react-icons/fa6";
+
+// ========================================
+// LAZY LOAD SPLINE (prevents mobile crash)
+// ========================================
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 // ========================================
 // EMAILJS CONFIG
@@ -119,14 +123,14 @@ function ContactForm() {
           EMAILJS_SERVICE_ID,
           WELCOME_TEMPLATE_ID,
           templateParams,
-          EMAILJS_PUBLIC_KEY
+          EMAILJS_PUBLIC_KEY,
         ),
         // Email 2: Notification email → sent TO you (owner)
         emailjs.send(
           EMAILJS_SERVICE_ID,
           NOTIFY_TEMPLATE_ID,
           templateParams,
-          EMAILJS_PUBLIC_KEY
+          EMAILJS_PUBLIC_KEY,
         ),
       ]);
 
@@ -403,14 +407,27 @@ function FAQItem({ faq, index }) {
 // MAIN CONTACT PAGE COMPONENT
 // ========================================
 export default function Contact() {
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <div className="contact-page bg-slate-950 text-slate-100">
       {/* ==================== 1. HERO SECTION ==================== */}
       <section className="contact-hero min-h-[70vh] relative flex items-center overflow-hidden pt-20">
-        {/* Spline Background */}
-        <div className="spline-bg absolute inset-0 pointer-events-none opacity-10">
-          <Spline scene={splineScenes.contact} />
-        </div>
+        {/* Spline Background - Only on Desktop */}
+        {!isMobile && (
+          <div className="spline-bg absolute inset-0 pointer-events-none opacity-10">
+            <Suspense fallback={null}>
+              <Spline scene={splineScenes.contact} />
+            </Suspense>
+          </div>
+        )}
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 pointer-events-none" />
@@ -533,8 +550,6 @@ export default function Contact() {
                     </p>
                   </div>
                 </motion.a>
-
-              
               </div>
 
               {/* Social Links */}
@@ -587,9 +602,7 @@ export default function Contact() {
             <div className="lg:col-span-3">
               <div className="bg-slate-950/50 backdrop-blur border border-slate-800 rounded-2xl p-8 lg:p-10">
                 <div className="mb-8">
-                  <h2 className="text-3xl font-bold mb-2">
-                    Send Me a Message
-                  </h2>
+                  <h2 className="text-3xl font-bold mb-2">Send Me a Message</h2>
                   <p className="text-slate-400">
                     Fill out the form below and I'll get back to you as soon as
                     possible.

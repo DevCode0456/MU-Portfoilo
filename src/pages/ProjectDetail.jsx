@@ -20,12 +20,12 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">Project Not Found</h2>
+      <div className="min-h-screen bg-slate-950 flex items-center  justify-center ">
+        <div className="text-center  ">
+          <h2 className="text-2xl font-bold text-white ">Project Not Found</h2>
           <button
             onClick={() => navigate('/projects')}
-            className="text-violet-400 hover:text-violet-300 flex items-center gap-2 mx-auto"
+            className="text-violet-400 hover:text-violet-300 flex items-center gap-2 mx-auto "
           >
             <MdArrowBack /> Back to Projects
           </button>
@@ -35,7 +35,7 @@ export default function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 py-20">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         {/* Background Gradient */}

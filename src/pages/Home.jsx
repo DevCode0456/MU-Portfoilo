@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import projects from "../data/projects";
-import Spline from "@splinetool/react-spline";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
   skills,
@@ -40,8 +40,12 @@ import {
   SiJavascript,
   SiTailwindcss,
 } from "react-icons/si";
-import { useState } from "react";
 import { AiFillRocket } from "react-icons/ai";
+
+// ========================================
+// LAZY LOAD SPLINE (prevents mobile crash)
+// ========================================
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 // ========================================
 // FRAMER MOTION VARIANTS
@@ -202,131 +206,144 @@ const techStack = [
   },
 ];
 
-
-  const processSteps = [
-    {
-      id: 1,
-      title: "Analyze Requirements",
-      icon: FiSearch,
-      color: "from-violet-500 to-purple-500",
-      glowColor: "shadow-violet-500/30",
-      description: "Deep dive into business goals, user needs, and technical requirements to establish a solid foundation.",
-      details: [
-        "Stakeholder interviews & workshops",
-        "Market & competitor analysis",
-        "Define success metrics & KPIs",
-        "Technical feasibility assessment"
-      ],
-      metrics: {
-        label: "Accuracy",
-        value: "98%"
-      }
+const processSteps = [
+  {
+    id: 1,
+    title: "Analyze Requirements",
+    icon: FiSearch,
+    color: "from-violet-500 to-purple-500",
+    glowColor: "shadow-violet-500/30",
+    description:
+      "Deep dive into business goals, user needs, and technical requirements to establish a solid foundation.",
+    details: [
+      "Stakeholder interviews & workshops",
+      "Market & competitor analysis",
+      "Define success metrics & KPIs",
+      "Technical feasibility assessment",
+    ],
+    metrics: {
+      label: "Accuracy",
+      value: "98%",
     },
-    {
-      id: 2,
-      title: "Design Architecture",
-      icon: FiLayout,
-      color: "from-blue-500 to-cyan-500",
-      glowColor: "shadow-blue-500/30",
-      description: "Create scalable system architecture with modern design patterns and best practices for optimal performance.",
-      details: [
-        "Database schema & data modeling",
-        "API design & microservices planning",
-        "UI/UX wireframes & prototypes",
-        "Security & scalability strategy"
-      ],
-      metrics: {
-        label: "Scalability",
-        value: "10x"
-      }
+  },
+  {
+    id: 2,
+    title: "Design Architecture",
+    icon: FiLayout,
+    color: "from-blue-500 to-cyan-500",
+    glowColor: "shadow-blue-500/30",
+    description:
+      "Create scalable system architecture with modern design patterns and best practices for optimal performance.",
+    details: [
+      "Database schema & data modeling",
+      "API design & microservices planning",
+      "UI/UX wireframes & prototypes",
+      "Security & scalability strategy",
+    ],
+    metrics: {
+      label: "Scalability",
+      value: "10x",
     },
-    {
-      id: 3,
-      title: "Development",
-      icon: FiCode,
-      color: "from-emerald-500 to-teal-500",
-      glowColor: "shadow-emerald-500/30",
-      description: "Build robust solutions using cutting-edge technologies with continuous testing and quality assurance.",
-      details: [
-        "Agile development sprints",
-        "Unit & integration testing",
-        "Code reviews & optimization",
-        "Performance monitoring"
-      ],
-      metrics: {
-        label: "Code Quality",
-        value: "A+"
-      }
+  },
+  {
+    id: 3,
+    title: "Development",
+    icon: FiCode,
+    color: "from-emerald-500 to-teal-500",
+    glowColor: "shadow-emerald-500/30",
+    description:
+      "Build robust solutions using cutting-edge technologies with continuous testing and quality assurance.",
+    details: [
+      "Agile development sprints",
+      "Unit & integration testing",
+      "Code reviews & optimization",
+      "Performance monitoring",
+    ],
+    metrics: {
+      label: "Code Quality",
+      value: "A+",
     },
-    {
-      id: 4,
-      title: "Delivery",
-      icon: AiFillRocket,
-      color: "from-orange-500 to-red-500",
-      glowColor: "shadow-orange-500/30",
-      description: "Seamless deployment with CI/CD pipelines, monitoring, and continuous optimization for growth.",
-      details: [
-        "Automated CI/CD deployment",
-        "Cloud infrastructure setup",
-        "Real-time monitoring & alerts",
-        "Continuous improvements & updates"
-      ],
-      metrics: {
-        label: "Uptime",
-        value: "99.9%"
-      }
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
- 
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+  },
+  {
+    id: 4,
+    title: "Delivery",
+    icon: AiFillRocket,
+    color: "from-orange-500 to-red-500",
+    glowColor: "shadow-orange-500/30",
+    description:
+      "Seamless deployment with CI/CD pipelines, monitoring, and continuous optimization for growth.",
+    details: [
+      "Automated CI/CD deployment",
+      "Cloud infrastructure setup",
+      "Real-time monitoring & alerts",
+      "Continuous improvements & updates",
+    ],
+    metrics: {
+      label: "Uptime",
+      value: "99.9%",
     },
-  };
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 // ========================================
 // COMPONENT
 // ========================================
 export default function Home() {
-   const [activeStep, setActiveStep] = useState(0);
-     const [hoveredCard, setHoveredCard] = useState(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [isMobile, setIsMobile] = useState(true);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <div className="home-page bg-slate-950 text-white">
       {/* ==================== 1. HERO SECTION ==================== */}
       <section className="hero min-h-screen relative flex items-center overflow-hidden ">
-        {/* Spline Background */}
-        <div className="spline-bg absolute inset-0 pointer-events-none opacity-20">
-          <Spline scene={heroData.splineScene} />
-        </div>
+        {/* Spline Background - Only on Desktop */}
+        {!isMobile && (
+          <div className="spline-bg absolute inset-0 pointer-events-none opacity-20">
+            <Suspense fallback={null}>
+              <Spline scene={heroData.splineScene} />
+            </Suspense>
+          </div>
+        )}
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/85 to-slate-950/95 pointer-events-none" />
@@ -370,7 +387,7 @@ export default function Home() {
 
               <h1 className="text-4xl lg:text-7xl font-bold uppercase leading-tight">
                 <span className="text-white">
-                  Muhammad <span className="text-green-500">Usman </span> 
+                  Muhammad <span className="text-green-500">Usman </span>
                 </span>
               </h1>
             </div>
@@ -456,74 +473,73 @@ export default function Home() {
           </motion.div>
 
           {/* RIGHT — IMAGE + FLOATING ICONS */}
-        <motion.div
-  initial={{ opacity: 0, scale: 0.9 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.8, delay: 0.3 }}
-  className="relative flex items-center justify-center p-2 sm:p-3 min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px]"
->
-  {/* Background Glows */}
-  <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-purple-600/20 blur-3xl rounded-full animate-pulse" />
-  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/15 to-pink-600/15 blur-2xl rounded-full" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative flex items-center justify-center p-2 sm:p-3 min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px]"
+          >
+            {/* Background Glows */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-purple-600/20 blur-3xl rounded-full animate-pulse" />
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/15 to-pink-600/15 blur-2xl rounded-full" />
 
-  {/* Orbiting Ring */}
-  <motion.div
-    animate={{ rotate: 360 }}
-    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-    className="absolute rounded-full border border-violet-500/20"
-    style={{
-      width: "120%",
-      height: "120%",
-      left: "-10%",
-      top: "-10%",
-    }}
-  />
+            {/* Orbiting Ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute rounded-full border border-violet-500/20"
+              style={{
+                width: "120%",
+                height: "120%",
+                left: "-10%",
+                top: "-10%",
+              }}
+            />
 
-  {/* Image */}
-  <div className="relative z-10 w-full max-w-[250px] sm:max-w-[320px] md:max-w-md">
-    <div className="relative w-full aspect-square">
-      {techStack.map((tech, i) => (
-        <FloatingIcon
-          key={i}
-          Icon={tech.Icon}
-          x={tech.x}
-          y={tech.y}
-          color={tech.color}
-          size={tech.size}
-          anim={tech.anim}
-        />
-      ))}
+            {/* Image */}
+            <div className="relative z-10 w-full max-w-[250px] sm:max-w-[320px] md:max-w-md">
+              <div className="relative w-full aspect-square">
+                {techStack.map((tech, i) => (
+                  <FloatingIcon
+                    key={i}
+                    Icon={tech.Icon}
+                    x={tech.x}
+                    y={tech.y}
+                    color={tech.color}
+                    size={tech.size}
+                    anim={tech.anim}
+                  />
+                ))}
 
-      {/* Profile Image */}
-      <motion.div className="relative w-full h-full flex items-center justify-center">
-        <div className="relative">
-          <img
-            src={personalInfo.image}
-            alt={personalInfo.name}
-            className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl border-2 sm:border-4 border-slate-800 ring-1 sm:ring-2 ring-violet-500/30"
-          />
-        </div>
-      </motion.div>
+                {/* Profile Image */}
+                <motion.div className="relative w-full h-full flex items-center justify-center">
+                  <div className="relative">
+                    <img
+                      src={personalInfo.image}
+                      alt={personalInfo.name}
+                      className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl border-2 sm:border-4 border-slate-800 ring-1 sm:ring-2 ring-violet-500/30"
+                    />
+                  </div>
+                </motion.div>
 
-      {/* Floating Experience Badge */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 md:-bottom-6 md:-right-6 bg-gradient-to-r from-green-500 to-teal-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-xl sm:rounded-2xl shadow-xl animate-glow"
-      >
-        <div className="text-xs sm:text-sm md:text-2xl font-bold">
-          2+ Years
+                {/* Floating Experience Badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1 }}
+                  className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 md:-bottom-6 md:-right-6 bg-gradient-to-r from-green-500 to-teal-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-xl sm:rounded-2xl shadow-xl animate-glow"
+                >
+                  <div className="text-xs sm:text-sm md:text-2xl font-bold">
+                    2+ Years
+                  </div>
+                  <div className="text-[10px] sm:text-xs md:text-sm opacity-90 font-medium">
+                    Experience
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-        <div className="text-[10px] sm:text-xs md:text-sm opacity-90 font-medium">
-          Experience
-        </div>
-      </motion.div>
-    </div>
-  </div>
-</motion.div>
-        </div>
-        
       </section>
       <section>
         <motion.div
@@ -587,9 +603,10 @@ export default function Home() {
                 className="text-4xl text-white lg:text-5xl font-bold uppercase"
               >
                 Passionate{" "}
-                <span className="text-white uppercase">About Creating</span> <span className="text-yellow-500 uppercase">
-                Digital
-                Experiences  </span> 
+                <span className="text-white uppercase">About Creating</span>{" "}
+                <span className="text-yellow-500 uppercase">
+                  Digital Experiences{" "}
+                </span>
               </motion.h2>
             </div>
 
@@ -615,7 +632,9 @@ export default function Home() {
                 <div className="w-12 h-12 bg-violet-500/10 rounded-xl flex items-center justify-center mb-4 hover:bg-white transition-all ">
                   <FiAward className="w-6 h-6 text-violet-400 hover:text-yellow-500 animate-float" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-500">Professional</h3>
+                <h3 className="text-xl font-semibold mb-2 text-green-500">
+                  Professional
+                </h3>
                 <p className="text-slate-100 text-sm">
                   Full-time Frontend Developer at Argonteq with proven track
                   record
@@ -629,7 +648,9 @@ export default function Home() {
                 <div className="w-12 h-12 bg-violet-500/10 rounded-xl flex items-center justify-center mb-4 hover:bg-white transition-all">
                   <FiTrendingUp className="w-6 h-6 text-green-400 hover:text-yellow-500 animate-bounce-slow" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-500">Results-Driven</h3>
+                <h3 className="text-xl font-semibold mb-2 text-green-500">
+                  Results-Driven
+                </h3>
                 <p className="text-slate-200 text-sm">
                   Delivered 20+ production apps serving 200K+ users globally
                 </p>
@@ -642,7 +663,9 @@ export default function Home() {
                 <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4 hover:bg-white transition-all">
                   <FiUsers className="w-6 h-6 text-purple-400 hover:text-green-500 animate-pulse" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-green-500">Team Player</h3>
+                <h3 className="text-xl font-semibold mb-2 text-green-500">
+                  Team Player
+                </h3>
                 <p className="text-slate-400 text-sm">
                   Collaborate effectively with designers, developers, and
                   stakeholders
@@ -690,41 +713,41 @@ export default function Home() {
           </div>
 
           <motion.div
-  variants={container}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: true, amount: 0.1 }}
-  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
->
-  {skills.map((skill, idx) => {
-    const SkillIcon = skill.icon;
-    return (
-      <motion.article
-        key={skill.name + idx}
-        variants={item}
-        whileHover={{ scale: 1.05, y: -8 }}
-        className="group bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/10 transition-all cursor-pointer"
-      >
-        <div className="flex items-center gap-3 mb-2 sm:mb-4">
-          <div
-            className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center bg-slate-800 rounded-lg sm:rounded-xl group-hover:bg-violet-500/10 transition-all"
-            style={{ color: skill.color }}
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
           >
-            <SkillIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-sm sm:text-base md:text-lg truncate">
-              {skill.name}
-            </h3>
-            <div className="text-[10px] sm:text-xs text-white uppercase truncate">
-              {skill.category}
-            </div>
-          </div>
-        </div>
-      </motion.article>
-    );
-  })}
-</motion.div>
+            {skills.map((skill, idx) => {
+              const SkillIcon = skill.icon;
+              return (
+                <motion.article
+                  key={skill.name + idx}
+                  variants={item}
+                  whileHover={{ scale: 1.05, y: -8 }}
+                  className="group bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/10 transition-all cursor-pointer"
+                >
+                  <div className="flex items-center gap-3 mb-2 sm:mb-4">
+                    <div
+                      className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center bg-slate-800 rounded-lg sm:rounded-xl group-hover:bg-violet-500/10 transition-all"
+                      style={{ color: skill.color }}
+                    >
+                      <SkillIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-sm sm:text-base md:text-lg truncate">
+                        {skill.name}
+                      </h3>
+                      <div className="text-[10px] sm:text-xs text-white uppercase truncate">
+                        {skill.category}
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
@@ -788,6 +811,7 @@ export default function Home() {
                       <img
                         src={project.image}
                         alt={project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
@@ -884,6 +908,7 @@ export default function Home() {
                           <img
                             src={exp.companyLogo}
                             alt={exp.company}
+                            loading="lazy"
                             className="w-full h-full object-contain  transition-transform group-hover:scale-110 bg-white"
                           />
                         </div>
@@ -979,622 +1004,635 @@ export default function Home() {
         </div>
       </section>
 
-       <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-950">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950 to-slate-900/50" />
-            
-            {/* Animated Dots Pattern */}
-            <div className="absolute inset-0 opacity-[0.02]">
-              <div className="absolute inset-0" 
-                style={{
-                  backgroundImage: 'radial-gradient(circle, rgb(139, 92, 246) 1px, transparent 1px)',
-                  backgroundSize: '40px 40px',
-                }}
-              />
-            </div>
-      
-            {/* Gradient Orbs */}
-            <div className="absolute top-20 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl animate-pulse" 
-              style={{ animationDuration: '6s' }}
-            />
-            <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" 
-              style={{ animationDuration: '8s' }}
-            />
-      
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
-              
-              {/* Section Header */}
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16 lg:mb-24"
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="inline-block mb-4"
-                >
-                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border rounded-full text-violet-400 text-sm font-medium backdrop-blur-sm animate-glow">
-                    <FiZap className="w-4 h-4" />
-                    What I Offer
-                  </span>
-                </motion.div>
-      
-                <h2 className="text-4xl lg:text-6xl font-bold mb-6 uppercase">
-                  <span className="text-white">
-my <span className="text-yellow-500">Capabilities</span>                  </span>
-                </h2>
-      
-                <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed">
-                  Delivering cutting-edge web solutions with modern technologies and best practices
-                  to bring your vision to life.
-                </p>
-              </motion.div>
-      
-              {/* Services Grid */}
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto"
-              >
-                {services.map((service, index) => {
-                  const ServiceIcon = service.icon;
-                  const isHovered = hoveredCard === index;
-      
-                  return (
-                    <motion.div
-                      key={service.id}
-                      variants={cardVariants}
-                      onHoverStart={() => setHoveredCard(index)}
-                      onHoverEnd={() => setHoveredCard(null)}
-                      className="group relative"
-                    >
-                      {/* Card Container */}
-                      <div className={`relative h-full bg-slate-900/50 backdrop-blur-sm border rounded-2xl p-8 lg:p-10 transition-all duration-500 ${
-                        isHovered
-                          ? 'border-violet-500/50 shadow-2xl shadow-violet-500/20 -translate-y-2'
-                          : 'border-slate-800 hover:border-slate-700'
-                      }`}>
-                        
-                        {/* Gradient Background Overlay */}
-                        <div 
-                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                          style={{ background: service.gradient }}
-                        />
-      
-                        {/* Header */}
-                        <div className="relative z-10">
-                          {/* Icon */}
-                          <motion.div
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            className="inline-block mb-6"
-                          >
-                            <div 
-                              className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl p-0.5 shadow-lg"
-                              style={{ background: service.gradient }}
-                            >
-                              <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center">
-                                <ServiceIcon 
-                                  className="w-8 h-8 lg:w-10 lg:h-10" 
-                                  style={{ color: service.color }}
-                                />
-                              </div>
-                            </div>
-                          </motion.div>
-      
-                          {/* Title */}
-                          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors">
-                            {service.title}
-                          </h3>
-      
-                          {/* Description */}
-                          <p className="text-slate-400 mb-8 leading-relaxed font-light">
-                            {service.description}
-                          </p>
-      
-                          {/* Details List */}
-                          <ul className="space-y-3 mb-8">
-                            {service.details.map((detail, idx) => {
-                              const DetailIcon = detail.icon;
-                              return (
-                                <motion.li
-                                  key={idx}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  whileInView={{ opacity: 1, x: 0 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.1 * idx }}
-                                  className="flex items-start gap-3 text-slate-300"
-                                >
-                                  <DetailIcon 
-                                    className="w-5 h-5 mt-0.5 flex-shrink-0"
-                                    style={{ color: service.color }}
-                                  />
-                                  <span className="group-hover:text-white transition-colors">
-                                    {detail.text}
-                                  </span>
-                                </motion.li>
-                              );
-                            })}
-                          </ul>
-      
-                          {/* Technologies */}
-                          <div className="border-t border-slate-800 pt-6">
-                            <p className="text-xs text-slate-500 uppercase tracking-wider mb-4 font-semibold">
-                              Technologies
-                            </p>
-                            <div className="flex flex-wrap gap-3">
-                              {service.technologies.map((tech, idx) => {
-                                const TechIcon = tech.icon;
-                                return (
-                                  <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.1 * idx }}
-                                    whileHover={{ scale: 1.1, y: -2 }}
-                                    className="group/tech relative"
-                                  >
-                                    <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-violet-500/50 transition-all backdrop-blur-sm">
-                                      <TechIcon 
-                                        className="w-4 h-4"
-                                        style={{ color: tech.color }}
-                                      />
-                                      <span className="text-sm text-slate-300 font-medium">
-                                        {tech.name}
-                                      </span>
-                                    </div>
-                                    
-                                    {/* Tooltip */}
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white opacity-0 group-hover/tech:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                                      {tech.name}
-                                    </div>
-                                  </motion.div>
-                                );
-                              })}
-                            </div>
-                          </div>
-      
-                        
-                        </div>
-      
-                        {/* Decorative Corner Element */}
-                        <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden rounded-tr-2xl opacity-10">
-                          <div 
-                            className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-2xl"
-                            style={{ background: service.gradient }}
-                          />
-                        </div>
-      
-                        {/* Card Number Badge */}
-                        <div className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-slate-900 border-2 border-violet-500/30 flex items-center justify-center font-bold text-violet-400 shadow-lg text-sm">
-                          {service.id}
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-      
-              {/* Bottom CTA Section */}
-             
-            </div>
-          </section>
+      <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-950">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950 to-slate-900/50" />
 
-      {/* ==================== 6. DEVELOPMENT JOURNEY ==================== */}
-       <section className="journey relative py-24 lg:py-32 overflow-hidden bg-slate-950">
-      {/* Enhanced Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950 to-slate-900/50" />
-      
-      {/* Animated Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" 
-        style={{
-          backgroundImage: `linear-gradient(to right, rgb(139, 92, 246) 1px, transparent 1px),
-                           linear-gradient(to bottom, rgb(139, 92, 246) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
+        {/* Animated Dots Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgb(139, 92, 246) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+        </div>
 
-      {/* Gradient Orbs */}
-      <div className="absolute top-1/4 left-20 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl animate-pulse" 
-        style={{ animationDuration: '6s' }}
-      />
-      <div className="absolute bottom-1/4 right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" 
-        style={{ animationDuration: '8s' }}
-      />
+        {/* Gradient Orbs */}
+        <div
+          className="absolute top-20 left-1/4 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "6s" }}
+        />
+        <div
+          className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "8s" }}
+        />
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block mb-4"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16 lg:mb-24"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border rounded-full text-violet-400 text-sm font-medium backdrop-blur-sm animate-glow">
-              <FiTrendingUp className="w-4 h-4" />
-              My Journey
-            </span>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-block mb-4"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border rounded-full text-violet-400 text-sm font-medium backdrop-blur-sm animate-glow">
+                <FiZap className="w-4 h-4" />
+                What I Offer
+              </span>
+            </motion.div>
+
+            <h2 className="text-4xl lg:text-6xl font-bold mb-6 uppercase">
+              <span className="text-white">
+                my <span className="text-yellow-500">Capabilities</span>{" "}
+              </span>
+            </h2>
+
+            <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed">
+              Delivering cutting-edge web solutions with modern technologies and
+              best practices to bring your vision to life.
+            </p>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          {/* Services Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-6xl font-bold mb-4 uppercase"
+            className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto"
           >
-            <span className="text-white ">
-              Development <span className="text-yellow-500">Timeline</span> 
-            </span>
-          </motion.h2>
+            {services.map((service, index) => {
+              const ServiceIcon = service.icon;
+              const isHovered = hoveredCard === index;
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400 max-w-2xl mx-auto font-light"
-          >
-            A continuous evolution of skills, achievements, and milestones in my development career
-          </motion.p>
-        </div>
-
-        {/* Timeline Container */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative">
-            
-            {/* Vertical Timeline Line - Enhanced */}
-            <div className="absolute left-4 md:left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-violet-500/50 to-transparent">
-              <motion.div
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="w-full h-full bg-gradient-to-b from-violet-500 via-purple-500 to-violet-500 origin-top"
-              />
-            </div>
-
-            <div className="space-y-12 md:space-y-16 lg:space-y-24">
-              {developmentJourney.map((phase, index) => {
-                const PhaseIcon = phase.icon;
-                const isEven = index % 2 === 0;
-                
-                return (
-                  <motion.div
-                    key={phase.year + index}
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="relative"
-                  >
-                    
-                    {/* Timeline Dot - Enhanced */}
-                    <div className="absolute left-4 md:left-8 lg:left-1/2 lg:-translate-x-1/2 z-20">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
-                        className="relative"
-                      >
-                        {/* Outer Glow Ring */}
-                        <div className="absolute inset-0 w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 blur-md opacity-50 animate-pulse" />
-                        
-                        {/* Main Circle */}
-                        <div 
-                          className="relative w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full border-2 md:border-4 border-slate-950 flex items-center justify-center shadow-xl"
-                          style={{ backgroundColor: phase.color }}
-                        >
-                          <PhaseIcon className="w-4 h-4 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Content Card - Mobile First Layout */}
-                    <div className={`ml-16 md:ml-24 lg:ml-0 ${
-                      isEven 
-                        ? 'lg:w-[calc(50%-4rem)] lg:mr-auto lg:pr-16' 
-                        : 'lg:w-[calc(50%-4rem)] lg:ml-auto lg:pl-16'
-                    }`}>
-                      <motion.div
-                        whileHover={{ scale: 1.02, y: -5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        className="group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 lg:p-10 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/20 transition-all"
-                      >
-                        
-                        {/* Gradient Overlay */}
-                        <div 
-                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500"
-                          style={{ background: `linear-gradient(135deg, ${phase.color}40 0%, transparent 100%)` }}
-                        />
-
-                        {/* Year Badge */}
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.4 + index * 0.1 }}
-                          className="absolute -top-3 -right-3 md:-top-4 md:-right-4 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg md:rounded-xl shadow-lg font-bold flex items-center gap-1.5 md:gap-2 text-sm md:text-base"
-                        >
-                          <FiCalendar className="w-3 h-3 md:w-4 md:h-4" />
-                          {phase.year}
-                        </motion.div>
-
-                        <div className="relative z-10">
-                          {/* Title & Subtitle */}
-                          <div className="mb-4 md:mb-6">
-                            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">
-                              {phase.title}
-                            </h3>
-                            <p className="text-sm md:text-base text-slate-400 italic font-light">
-                              {phase.subtitle}
-                            </p>
-                          </div>
-
-                          {/* Description */}
-                          <p className="text-sm md:text-base text-slate-300 mb-6 md:mb-8 leading-relaxed font-light">
-                            {phase.description}
-                          </p>
-
-                          {/* Achievements */}
-                          <div className="mb-6 md:mb-8">
-                            <h4 className="text-xs font-bold text-violet-400 uppercase tracking-wider mb-3 md:mb-4 flex items-center gap-2">
-                              <span className="w-6 md:w-8 h-px bg-violet-500/50" />
-                              Key Achievements
-                            </h4>
-                            <ul className="space-y-2 md:space-y-3">
-                              {phase.achievements.map((achievement, i) => (
-                                <motion.li
-                                  key={i}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  whileInView={{ opacity: 1, x: 0 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.5 + index * 0.1 + i * 0.05 }}
-                                  className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-slate-300"
-                                >
-                                  <span 
-                                    className="w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-[10px] md:text-xs mt-0.5"
-                                    style={{ backgroundColor: phase.color }}
-                                  >
-                                    ✓
-                                  </span>
-                                  <span className="group-hover:text-white transition-colors">
-                                    {achievement}
-                                  </span>
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          {/* Skills Tags */}
-                          <div>
-                            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-                              Skills & Technologies
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {phase.skills.map((skill, i) => (
-                                <motion.span
-                                  key={i}
-                                  initial={{ opacity: 0, scale: 0.8 }}
-                                  whileInView={{ opacity: 1, scale: 1 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.6 + index * 0.1 + i * 0.03 }}
-                                  whileHover={{ scale: 1.05, y: -2 }}
-                                  className="px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-800/70 backdrop-blur-sm text-slate-300 text-[11px] md:text-xs rounded-lg border border-slate-700 hover:border-violet-500/50 hover:text-violet-300 transition-all font-medium"
-                                >
-                                  {skill}
-                                </motion.span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Decorative Corner */}
-                        <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 overflow-hidden rounded-br-2xl opacity-10">
-                          <div 
-                            className="absolute -bottom-8 -right-8 md:-bottom-12 md:-right-12 w-16 h-16 md:w-24 md:h-24 rounded-full blur-xl"
-                            style={{ backgroundColor: phase.color }}
-                          />
-                        </div>
-                      </motion.div>
-                    </div>
-
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-      
-      </div>
-    </section>
-
-        <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-950">
-            {/* Background Elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" />
-            
-            {/* Animated Grid */}
-            <div className="absolute inset-0 opacity-[0.03]" 
-              style={{
-                backgroundImage: `linear-gradient(to right, rgb(139, 92, 246) 1px, transparent 1px),
-                                 linear-gradient(to bottom, rgb(139, 92, 246) 1px, transparent 1px)`,
-                backgroundSize: '60px 60px'
-              }}
-            />
-      
-            {/* Gradient Orbs */}
-            <div className="absolute top-1/4 left-10 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
-      
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
-              
-              {/* Section Header */}
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-16 lg:mb-24"
-              >
+              return (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="inline-block mb-4"
+                  key={service.id}
+                  variants={cardVariants}
+                  onHoverStart={() => setHoveredCard(index)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  className="group relative"
                 >
-                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border  rounded-full text-violet-400 text-sm font-medium animate-glow backdrop-blur-sm">
-                    <FiLayers className="w-4 h-4" />
-                    Development Process
-                  </span>
-                </motion.div>
-      
-                <h2 className="text-4xl lg:text-6xl font-bold mb-6 uppercase">
-                  <span className="text-white">
-                    My <span className="text-yellow-500">4-Step</span> Approach
-                  </span>
-                </h2>
-                
-                <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-light">
-                  A proven 4-step methodology that transforms ideas into high-performance, 
-                  scalable web applications built for growth.
-                </p>
-              </motion.div>
-      
-              {/* Process Timeline */}
-              <div className="relative max-w-7xl mx-auto">
-                
-                {/* Connection Line - Desktop */}
-                <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20">
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "easeInOut" }}
-                    className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-orange-500 origin-left"
-                  />
-                </div>
-      
-                {/* Steps Grid */}
-                <motion.div 
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="grid lg:grid-cols-4 gap-8 lg:gap-6"
-                >
-                  {processSteps.map((step, index) => {
-                    const StepIcon = step.icon;
-                    const isActive = activeStep === index;
-                    
-                    return (
+                  {/* Card Container */}
+                  <div
+                    className={`relative h-full bg-slate-900/50 backdrop-blur-sm border rounded-2xl p-8 lg:p-10 transition-all duration-500 ${
+                      isHovered
+                        ? "border-violet-500/50 shadow-2xl shadow-violet-500/20 -translate-y-2"
+                        : "border-slate-800 hover:border-slate-700"
+                    }`}
+                  >
+                    {/* Gradient Background Overlay */}
+                    <div
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500"
+                      style={{ background: service.gradient }}
+                    />
+
+                    {/* Header */}
+                    <div className="relative z-10">
+                      {/* Icon */}
                       <motion.div
-                        key={step.id}
-                        variants={itemVariants}
-                        onHoverStart={() => setActiveStep(index)}
-                        className="relative group"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        className="inline-block mb-6"
                       >
-                        {/* Card */}
-                        <div className={`relative h-full bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 lg:p-8 transition-all duration-500 ${
-                          isActive 
-                            ? 'border-violet-500/50 shadow-2xl shadow-violet-500/20 scale-105' 
-                            : 'hover:border-slate-700 hover:shadow-xl'
-                        }`}>
-                          
-                          {/* Step Number */}
-                          <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-violet-500/30 flex items-center justify-center font-bold text-violet-400 shadow-lg">
-                            {step.id}
+                        <div
+                          className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl p-0.5 shadow-lg"
+                          style={{ background: service.gradient }}
+                        >
+                          <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center">
+                            <ServiceIcon
+                              className="w-8 h-8 lg:w-10 lg:h-10"
+                              style={{ color: service.color }}
+                            />
                           </div>
-      
-                          {/* Icon */}
-                          <motion.div
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            className={`w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${step.color} p-0.5 mb-6 ${step.glowColor} shadow-lg group-hover:shadow-xl transition-all`}
-                          >
-                            <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center">
-                              <StepIcon className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
-                            </div>
-                          </motion.div>
-      
-                          {/* Title */}
-                          <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors">
-                            {step.title}
-                          </h3>
-      
-                          {/* Description */}
-                          <p className="text-slate-400 mb-6 leading-relaxed font-light">
-                            {step.description}
-                          </p>
-      
-                          {/* Details List */}
-                          <ul className="space-y-2 mb-6">
-                            {step.details.map((detail, idx) => (
-                              <motion.li
+                        </div>
+                      </motion.div>
+
+                      {/* Title */}
+                      <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors">
+                        {service.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-slate-400 mb-8 leading-relaxed font-light">
+                        {service.description}
+                      </p>
+
+                      {/* Details List */}
+                      <ul className="space-y-3 mb-8">
+                        {service.details.map((detail, idx) => {
+                          const DetailIcon = detail.icon;
+                          return (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.1 * idx }}
+                              className="flex items-start gap-3 text-slate-300"
+                            >
+                              <DetailIcon
+                                className="w-5 h-5 mt-0.5 flex-shrink-0"
+                                style={{ color: service.color }}
+                              />
+                              <span className="group-hover:text-white transition-colors">
+                                {detail.text}
+                              </span>
+                            </motion.li>
+                          );
+                        })}
+                      </ul>
+
+                      {/* Technologies */}
+                      <div className="border-t border-slate-800 pt-6">
+                        <p className="text-xs text-slate-500 uppercase tracking-wider mb-4 font-semibold">
+                          Technologies
+                        </p>
+                        <div className="flex flex-wrap gap-3">
+                          {service.technologies.map((tech, idx) => {
+                            const TechIcon = tech.icon;
+                            return (
+                              <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, x: -10 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 * idx }}
-                                className="flex items-start gap-2 text-sm text-slate-400"
+                                whileHover={{ scale: 1.1, y: -2 }}
+                                className="group/tech relative"
                               >
-                                <FiCheckCircle className={`w-4 h-4 mt-0.5 flex-shrink-0 bg-gradient-to-r ${step.color} bg-clip-text text-transparent`} />
-                                <span className="group-hover:text-slate-300 transition-colors">{detail}</span>
-                              </motion.li>
-                            ))}
-                          </ul>
-      
-                          {/* Metrics Badge */}
-                          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r ${step.color} bg-opacity-10 border border-white/10`}>
-                            <FiTrendingUp className="w-4 h-4 text-white" />
-                            <span className="text-sm font-semibold text-white">
-                              {step.metrics.label}: {step.metrics.value}
-                            </span>
-                          </div>
-      
-                          {/* Hover Glow Effect */}
-                          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`} />
+                                <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-violet-500/50 transition-all backdrop-blur-sm">
+                                  <TechIcon
+                                    className="w-4 h-4"
+                                    style={{ color: tech.color }}
+                                  />
+                                  <span className="text-sm text-slate-300 font-medium">
+                                    {tech.name}
+                                  </span>
+                                </div>
+
+                                {/* Tooltip */}
+                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white opacity-0 group-hover/tech:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                  {tech.name}
+                                </div>
+                              </motion.div>
+                            );
+                          })}
                         </div>
-      
-                        {/* Connecting Dot - Desktop */}
+                      </div>
+                    </div>
+
+                    {/* Decorative Corner Element */}
+                    <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden rounded-tr-2xl opacity-10">
+                      <div
+                        className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-2xl"
+                        style={{ background: service.gradient }}
+                      />
+                    </div>
+
+                    {/* Card Number Badge */}
+                    <div className="absolute -top-3 -left-3 w-10 h-10 rounded-full bg-slate-900 border-2 border-violet-500/30 flex items-center justify-center font-bold text-violet-400 shadow-lg text-sm">
+                      {service.id}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Bottom CTA Section */}
+        </div>
+      </section>
+
+      {/* ==================== 6. DEVELOPMENT JOURNEY ==================== */}
+      <section className="journey relative py-24 lg:py-32 overflow-hidden bg-slate-950">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950 to-slate-900/50" />
+
+        {/* Animated Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(to right, rgb(139, 92, 246) 1px, transparent 1px),
+                           linear-gradient(to bottom, rgb(139, 92, 246) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Gradient Orbs */}
+        <div
+          className="absolute top-1/4 left-20 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "6s" }}
+        />
+        <div
+          className="absolute bottom-1/4 right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDuration: "8s" }}
+        />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-block mb-4"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border rounded-full text-violet-400 text-sm font-medium backdrop-blur-sm animate-glow">
+                <FiTrendingUp className="w-4 h-4" />
+                My Journey
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl lg:text-6xl font-bold mb-4 uppercase"
+            >
+              <span className="text-white ">
+                Development <span className="text-yellow-500">Timeline</span>
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-slate-400 max-w-2xl mx-auto font-light"
+            >
+              A continuous evolution of skills, achievements, and milestones in
+              my development career
+            </motion.p>
+          </div>
+
+          {/* Timeline Container */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative">
+              {/* Vertical Timeline Line - Enhanced */}
+              <div className="absolute left-4 md:left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-violet-500/50 to-transparent">
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="w-full h-full bg-gradient-to-b from-violet-500 via-purple-500 to-violet-500 origin-top"
+                />
+              </div>
+
+              <div className="space-y-12 md:space-y-16 lg:space-y-24">
+                {developmentJourney.map((phase, index) => {
+                  const PhaseIcon = phase.icon;
+                  const isEven = index % 2 === 0;
+
+                  return (
+                    <motion.div
+                      key={phase.year + index}
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="relative"
+                    >
+                      {/* Timeline Dot - Enhanced */}
+                      <div className="absolute left-4 md:left-8 lg:left-1/2 lg:-translate-x-1/2 z-20">
                         <motion.div
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
-                          className={`hidden lg:block absolute -top-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-br ${step.color} border-4 border-slate-950 ${step.glowColor} shadow-lg z-10 ${
-                            isActive ? 'scale-125' : ''
-                          } transition-transform`}
-                        />
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-              </div>
-      
-              {/* Bottom CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8 }}
-                className="text-center mt-16 lg:mt-24"
-              >
-               
-              </motion.div>
-      
-            </div>
-          </section>
+                          transition={{
+                            delay: 0.3 + index * 0.1,
+                            type: "spring",
+                          }}
+                          className="relative"
+                        >
+                          {/* Outer Glow Ring */}
+                          <div className="absolute inset-0 w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 blur-md opacity-50 animate-pulse" />
 
-     
+                          {/* Main Circle */}
+                          <div
+                            className="relative w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full border-2 md:border-4 border-slate-950 flex items-center justify-center shadow-xl"
+                            style={{ backgroundColor: phase.color }}
+                          >
+                            <PhaseIcon className="w-4 h-4 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Content Card - Mobile First Layout */}
+                      <div
+                        className={`ml-16 md:ml-24 lg:ml-0 ${
+                          isEven
+                            ? "lg:w-[calc(50%-4rem)] lg:mr-auto lg:pr-16"
+                            : "lg:w-[calc(50%-4rem)] lg:ml-auto lg:pl-16"
+                        }`}
+                      >
+                        <motion.div
+                          whileHover={{ scale: 1.02, y: -5 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                          className="group relative bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-2xl p-6 md:p-8 lg:p-10 hover:border-violet-500/50 hover:shadow-2xl hover:shadow-violet-500/20 transition-all"
+                        >
+                          {/* Gradient Overlay */}
+                          <div
+                            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-5 transition-opacity duration-500"
+                            style={{
+                              background: `linear-gradient(135deg, ${phase.color}40 0%, transparent 100%)`,
+                            }}
+                          />
+
+                          {/* Year Badge */}
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 + index * 0.1 }}
+                            className="absolute -top-3 -right-3 md:-top-4 md:-right-4 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg md:rounded-xl shadow-lg font-bold flex items-center gap-1.5 md:gap-2 text-sm md:text-base"
+                          >
+                            <FiCalendar className="w-3 h-3 md:w-4 md:h-4" />
+                            {phase.year}
+                          </motion.div>
+
+                          <div className="relative z-10">
+                            {/* Title & Subtitle */}
+                            <div className="mb-4 md:mb-6">
+                              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">
+                                {phase.title}
+                              </h3>
+                              <p className="text-sm md:text-base text-slate-400 italic font-light">
+                                {phase.subtitle}
+                              </p>
+                            </div>
+
+                            {/* Description */}
+                            <p className="text-sm md:text-base text-slate-300 mb-6 md:mb-8 leading-relaxed font-light">
+                              {phase.description}
+                            </p>
+
+                            {/* Achievements */}
+                            <div className="mb-6 md:mb-8">
+                              <h4 className="text-xs font-bold text-violet-400 uppercase tracking-wider mb-3 md:mb-4 flex items-center gap-2">
+                                <span className="w-6 md:w-8 h-px bg-violet-500/50" />
+                                Key Achievements
+                              </h4>
+                              <ul className="space-y-2 md:space-y-3">
+                                {phase.achievements.map((achievement, i) => (
+                                  <motion.li
+                                    key={i}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                      delay: 0.5 + index * 0.1 + i * 0.05,
+                                    }}
+                                    className="flex items-start gap-2 md:gap-3 text-xs md:text-sm text-slate-300"
+                                  >
+                                    <span
+                                      className="w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-[10px] md:text-xs mt-0.5"
+                                      style={{ backgroundColor: phase.color }}
+                                    >
+                                      ✓
+                                    </span>
+                                    <span className="group-hover:text-white transition-colors">
+                                      {achievement}
+                                    </span>
+                                  </motion.li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Skills Tags */}
+                            <div>
+                              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+                                Skills & Technologies
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {phase.skills.map((skill, i) => (
+                                  <motion.span
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                      delay: 0.6 + index * 0.1 + i * 0.03,
+                                    }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    className="px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-800/70 backdrop-blur-sm text-slate-300 text-[11px] md:text-xs rounded-lg border border-slate-700 hover:border-violet-500/50 hover:text-violet-300 transition-all font-medium"
+                                  >
+                                    {skill}
+                                  </motion.span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Decorative Corner */}
+                          <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 overflow-hidden rounded-br-2xl opacity-10">
+                            <div
+                              className="absolute -bottom-8 -right-8 md:-bottom-12 md:-right-12 w-16 h-16 md:w-24 md:h-24 rounded-full blur-xl"
+                              style={{ backgroundColor: phase.color }}
+                            />
+                          </div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-950">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" />
+
+        {/* Animated Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(to right, rgb(139, 92, 246) 1px, transparent 1px),
+                                 linear-gradient(to bottom, rgb(139, 92, 246) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Gradient Orbs */}
+        <div className="absolute top-1/4 left-10 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16 lg:mb-24"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-block mb-4"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border  rounded-full text-violet-400 text-sm font-medium animate-glow backdrop-blur-sm">
+                <FiLayers className="w-4 h-4" />
+                Development Process
+              </span>
+            </motion.div>
+
+            <h2 className="text-4xl lg:text-6xl font-bold mb-6 uppercase">
+              <span className="text-white">
+                My <span className="text-yellow-500">4-Step</span> Approach
+              </span>
+            </h2>
+
+            <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-light">
+              A proven 4-step methodology that transforms ideas into
+              high-performance, scalable web applications built for growth.
+            </p>
+          </motion.div>
+
+          {/* Process Timeline */}
+          <div className="relative max-w-7xl mx-auto">
+            {/* Connection Line - Desktop */}
+            <div className="hidden lg:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-violet-500/20">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-orange-500 origin-left"
+              />
+            </div>
+
+            {/* Steps Grid */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid lg:grid-cols-4 gap-8 lg:gap-6"
+            >
+              {processSteps.map((step, index) => {
+                const StepIcon = step.icon;
+                const isActive = activeStep === index;
+
+                return (
+                  <motion.div
+                    key={step.id}
+                    variants={itemVariants}
+                    onHoverStart={() => setActiveStep(index)}
+                    className="relative group"
+                  >
+                    {/* Card */}
+                    <div
+                      className={`relative h-full bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 lg:p-8 transition-all duration-500 ${
+                        isActive
+                          ? "border-violet-500/50 shadow-2xl shadow-violet-500/20 scale-105"
+                          : "hover:border-slate-700 hover:shadow-xl"
+                      }`}
+                    >
+                      {/* Step Number */}
+                      <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-violet-500/30 flex items-center justify-center font-bold text-violet-400 shadow-lg">
+                        {step.id}
+                      </div>
+
+                      {/* Icon */}
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        className={`w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${step.color} p-0.5 mb-6 ${step.glowColor} shadow-lg group-hover:shadow-xl transition-all`}
+                      >
+                        <div className="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center">
+                          <StepIcon className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
+                        </div>
+                      </motion.div>
+
+                      {/* Title */}
+                      <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors">
+                        {step.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-slate-400 mb-6 leading-relaxed font-light">
+                        {step.description}
+                      </p>
+
+                      {/* Details List */}
+                      <ul className="space-y-2 mb-6">
+                        {step.details.map((detail, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 * idx }}
+                            className="flex items-start gap-2 text-sm text-slate-400"
+                          >
+                            <FiCheckCircle
+                              className={`w-4 h-4 mt-0.5 flex-shrink-0 bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}
+                            />
+                            <span className="group-hover:text-slate-300 transition-colors">
+                              {detail}
+                            </span>
+                          </motion.li>
+                        ))}
+                      </ul>
+
+                      {/* Metrics Badge */}
+                      <div
+                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r ${step.color} bg-opacity-10 border border-white/10`}
+                      >
+                        <FiTrendingUp className="w-4 h-4 text-white" />
+                        <span className="text-sm font-semibold text-white">
+                          {step.metrics.label}: {step.metrics.value}
+                        </span>
+                      </div>
+
+                      {/* Hover Glow Effect */}
+                      <div
+                        className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`}
+                      />
+                    </div>
+
+                    {/* Connecting Dot - Desktop */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className={`hidden lg:block absolute -top-8 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-br ${step.color} border-4 border-slate-950 ${step.glowColor} shadow-lg z-10 ${
+                        isActive ? "scale-125" : ""
+                      } transition-transform`}
+                    />
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-16 lg:mt-24"
+          ></motion.div>
+        </div>
+      </section>
 
       {/* ==================== 8. CTA SECTION ==================== */}
       <section className="cta py-24 bg-gradient-to-br from-violet-900/20 via-slate-900 to-purple-900/20">
@@ -1613,7 +1651,7 @@ my <span className="text-yellow-500">Capabilities</span>                  </span
                 className="text-4xl lg:text-5xl font-bold mb-6 uppercase"
               >
                 Let's Build Something{" "}
-                <span className="text-yellow-500">Amazing Together</span> 
+                <span className="text-yellow-500">Amazing Together</span>
               </motion.h2>
 
               <motion.p
