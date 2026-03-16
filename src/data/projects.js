@@ -1,4 +1,3 @@
-import Images from "../Helper/ImagesConstant";
 import {
   MdDashboard,
   MdSecurity,
@@ -32,6 +31,7 @@ import {
   IoMdSpeedometer,
 } from "react-icons/io";
 import { HiSparkles } from "react-icons/hi";
+
 export const colorSchemes = {
   primary: {
     main: "#3B82F6",
@@ -58,6 +58,7 @@ export const colorSchemes = {
     content: "#06B6D4",
   },
 };
+
 export const projects = [
   {
     id: 1,
@@ -69,13 +70,13 @@ export const projects = [
       "LandPricer is a real estate valuation platform designed to streamline property assessment, subscription management, and payment flows.",
     longDescription:
       "A comprehensive real estate valuation platform that simplifies property assessment and management. Built with React and modern UI frameworks, it provides seamless user experience across authentication, subscription management, payment processing, and property valuation workflows.",
-    image: Images.LANDPRICER_HOME_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605088/Home_jcvwpu.png",
     color: colorSchemes.categories.realEstate,
     icon: MdDashboard,
     images: [
       // Login Screens
       {
-        src: Images.LANDPRICER_LOGIN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605104/Login_page_vkdhea.png",
         heading: "Secure User Login Portal",
         subheading: "Streamlined Authentication Experience",
         description: "Clean and secure login interface with email validation",
@@ -83,16 +84,16 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_LOGIN_ERROR_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605117/login_error_page_wmkqub.png",
         heading: "Login Error Handling",
         subheading: "User-Friendly Error Messages",
         description: "Clear error feedback for failed login attempts",
         icon: MdSecurity,
-        color: colorSchemes.error?.main || "#EF4444",
+        color: colorSchemes.danger.main,
       },
       // Signup / Register
       {
-        src: Images.LANDPRICER_CREATE_ACCOUNT_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605045/Create_account_page_vnbgki.png",
         heading: "Account Creation",
         subheading: "New User Registration",
         description: "Intuitive signup process with step-by-step guidance",
@@ -100,7 +101,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_REGESTRATION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605123/Registration_jqdi03.png",
         heading: "Registration Form",
         subheading: "User Information Capture",
         description: "Comprehensive registration with validation",
@@ -108,7 +109,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.LANDPRICER_CREATE_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605094/Create_password_hiyh73.png",
         heading: "Password Setup",
         subheading: "Secure Password Creation",
         description: "Strong password requirements with real-time validation",
@@ -117,7 +118,7 @@ export const projects = [
       },
       // Password Recovery
       {
-        src: Images.LANDPRICER_RECOVER_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605116/Recover_password_byeeyq.png",
         heading: "Password Recovery",
         subheading: "Account Recovery Flow",
         description: "Easy password reset process",
@@ -125,7 +126,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_RECOVER_PASSWORD1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605135/Recover_password_1_gidftr.png",
         heading: "Password Reset Request",
         subheading: "Email Verification Step",
         description: "Secure password recovery via email",
@@ -133,7 +134,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_RECOVER_PASSWORD_OTP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605124/Recover_password_otp_ttkhpo.png",
         heading: "OTP Verification",
         subheading: "Two-Factor Authentication",
         description: "One-time password verification for security",
@@ -141,7 +142,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_CREATE_NEW_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605044/Create_new_password_h9qbyg.png",
         heading: "New Password Creation",
         subheading: "Reset Password Interface",
         description: "Create new secure password",
@@ -149,7 +150,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.LANDPRICER_CREATE_NEW_PASSWORD_DONE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605040/create_new_password_done_s2gill.png",
         heading: "Password Reset Confirmation",
         subheading: "Success Notification",
         description: "Confirmation of successful password change",
@@ -158,7 +159,7 @@ export const projects = [
       },
       // Home Screens
       {
-        src: Images.LANDPRICER_INITIAL_SCREEN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605074/Inital_Screen_xfwwwm.png",
         heading: "Welcome Screen",
         subheading: "User Onboarding",
         description: "Initial screen after successful login",
@@ -166,7 +167,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_HOME_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605088/Home_jcvwpu.png",
         heading: "Main Dashboard",
         subheading: "Centralized Platform Hub",
         description: "Modern dashboard with quick actions and analytics",
@@ -174,7 +175,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.LANDPRICER_HOME2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605076/Home2_eogtrt.png",
         heading: "Dashboard Alternative View",
         subheading: "Enhanced Dashboard Layout",
         description: "Alternative dashboard design with expanded features",
@@ -183,7 +184,7 @@ export const projects = [
       },
       // Profile & Account
       {
-        src: Images.LANDPRICER_MY_PROFILE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605095/My_profile_riamgs.png",
         heading: "User Profile Management",
         subheading: "Personal Information Hub",
         description: "Comprehensive profile management and settings",
@@ -192,7 +193,7 @@ export const projects = [
       },
       // Workflow / Tools
       {
-        src: Images.LANDPRICER_ARICIVECHAT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605025/Acivechat2_bkpxwe.png",
         heading: "Active Chat Interface",
         subheading: "Real-Time Communication",
         description: "Interactive chat for support and queries",
@@ -200,7 +201,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_SCREEN_WITH_MULTIPLEOPTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605162/screen_With_multiple_options_lvrsj7.png",
         heading: "Multiple Choice Interface",
         subheading: "Decision Selection Screen",
         description: "User-friendly option selection interface",
@@ -208,7 +209,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_SCREEN_WITH_INPUTSCREEN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605130/screen_With_input_option_ud94jq.png",
         heading: "Input Collection Screen",
         subheading: "Data Entry Interface",
         description: "Streamlined input form for property details",
@@ -216,7 +217,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_EDIT_SCREEN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605054/eDIT_SCREEN_miquig.png",
         heading: "Edit Interface",
         subheading: "Modification Workspace",
         description: "Edit and update property information",
@@ -224,7 +225,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_EDIT_RESPONSE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605047/Edit_Response_rus07f.png",
         heading: "Response Editor",
         subheading: "AI Response Customization",
         description: "Edit and refine automated responses",
@@ -232,7 +233,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.LANDPRICER_GET_FUNDING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605050/Get_Funding_clzuw0.png",
         heading: "Funding Request",
         subheading: "Financial Assistance Portal",
         description: "Request funding for property purchases",
@@ -240,7 +241,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_GET_FUNDIND_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605055/getfunding_cz32lq.png",
         heading: "Funding Application",
         subheading: "Loan Application Form",
         description: "Complete funding application process",
@@ -248,7 +249,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_COMPLETE_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605038/complete_page_mhgzfb.png",
         heading: "Process Completion",
         subheading: "Success Confirmation",
         description: "Confirmation of completed workflow",
@@ -257,7 +258,7 @@ export const projects = [
       },
       // Pricing & Subscription
       {
-        src: Images.LANDPRICER_PRICING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605106/pricing_frf2ps.png",
         heading: "Subscription Plans",
         subheading: "Feature Comparison Matrix",
         description: "Clear pricing tiers with feature breakdown",
@@ -265,7 +266,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_SUBSCRIPTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605152/Subscription_soajb6.png",
         heading: "Active Subscription",
         subheading: "Plan Management",
         description: "Current subscription details and usage",
@@ -273,7 +274,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_CHANGE_SUBSCRIPTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605057/Change_subscription_plan_kr3i6k.png",
         heading: "Change Subscription Plan",
         subheading: "Plan Upgrade/Downgrade",
         description: "Modify subscription tier seamlessly",
@@ -282,7 +283,7 @@ export const projects = [
       },
       // Payment & Billing
       {
-        src: Images.LANDPRICER_ADD_PAYMENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605150/Add_new_payment_method_znvid8.png",
         heading: "Payment Method Registration",
         subheading: "Secure Billing Setup",
         description: "PCI-compliant payment method entry",
@@ -290,7 +291,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.LANDPRICER_CHANGE_PAYMENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605088/Change_payment_method_ro1wgf.png",
         heading: "Update Payment Method",
         subheading: "Payment Information Update",
         description: "Change or update payment details",
@@ -298,7 +299,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.LANDPRICER_PAYMENT_DETAIL_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605099/payment_details_page_glpzqq.png",
         heading: "Payment Details",
         subheading: "Billing Information Overview",
         description: "Comprehensive payment history and details",
@@ -306,7 +307,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_PAYMENT_DETAIL_IMG1,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605146/payment_details_page_1_ywaliq.png",
         heading: "Payment Details (Extended)",
         subheading: "Detailed Transaction View",
         description: "In-depth payment and transaction information",
@@ -314,7 +315,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.LANDPRICER_INVOICE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605087/Invoice_giz1dp.png",
         heading: "Invoice Generation",
         subheading: "Billing Documentation",
         description: "Downloadable invoices for all transactions",
@@ -323,7 +324,7 @@ export const projects = [
       },
       // Other Features
       {
-        src: Images.LANDPRICER_ARCHIVE_POPUP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605027/Archive_popup_with_scroller_ob0qdx.png",
         heading: "Archive Management",
         subheading: "Historical Data Access",
         description: "Browse and restore archived items",
@@ -331,20 +332,20 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.LANDPRICER_REPORT_BUG_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605156/Report_bug_as4z0s.png",
         heading: "Bug Reporting",
         subheading: "Issue Submission Portal",
         description: "Report bugs and technical issues",
         icon: MdCode,
-        color: colorSchemes.error?.main || "#EF4444",
+        color: colorSchemes.danger.main,
       },
       {
-        src: Images.LANDPRICER__REPORT_BUG_DROPDOWN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773605120/report_bug_dropdown_stqez4.png",
         heading: "Bug Category Selection",
         subheading: "Issue Categorization",
         description: "Categorize bugs for faster resolution",
         icon: MdCode,
-        color: colorSchemes.error?.main || "#EF4444",
+        color: colorSchemes.danger.main,
       },
     ],
     technologies: [
@@ -382,14 +383,14 @@ export const projects = [
       "HealinK is a comprehensive healthcare management platform connecting administrators, doctors, staff, and patients.",
     longDescription:
       "A full-featured healthcare management system designed to streamline clinical workflows. Built with React and modern healthcare compliance standards, ensuring HIPAA compliance and secure patient data management.",
-    image: Images.HEALINK_ADMIN_DASHBOARD_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606642/Admin_Dashoard_ixvxfv.jpg",
     color: colorSchemes.categories.healthcare,
     gradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
     icon: MdDashboard,
     images: [
       // Admin Dashboard
       {
-        src: Images.HEALINK_ADMIN_DASHBOARD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606642/Admin_Dashoard_ixvxfv.jpg",
         heading: "Administrative Command Center",
         subheading: "Healthcare Operations Dashboard",
         description: "High-level overview for clinic operations and analytics",
@@ -397,7 +398,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HEALINK_ADMIN_DOCTOR_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606656/Admin-Doctors_hwyqyr.jpg",
         heading: "Doctor Management (Admin)",
         subheading: "Physician Directory",
         description: "Manage all doctors in the healthcare system",
@@ -405,7 +406,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_ADMIN_DOCTOR1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606661/Admin-Doctors_1_b0intp.jpg",
         heading: "Doctor Listing (Admin)",
         subheading: "Complete Physician Roster",
         description: "Detailed view of all registered doctors",
@@ -413,7 +414,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_ADMIN_DOCTORDETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606652/Admin-Doctor_Details_p4sdjf.jpg",
         heading: "Doctor Details (Admin)",
         subheading: "Physician Profile Information",
         description: "Comprehensive doctor information and credentials",
@@ -421,7 +422,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_ADMIN_STAFF_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606663/Admin-Staff_vaumhy.jpg",
         heading: "Staff Management (Admin)",
         subheading: "Personnel Administration",
         description: "Manage all staff members and roles",
@@ -429,7 +430,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_ADMIN_VISITS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606664/Admin-Visits_p5wayt.jpg",
         heading: "Visit Management (Admin)",
         subheading: "Patient Appointments Overview",
         description: "Track and manage all patient visits",
@@ -437,7 +438,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HEALINK_ADMIN_VISITS1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606642/Admin-Visits_1_lrzxh7.jpg",
         heading: "Visit Details (Admin)",
         subheading: "Appointment Information",
         description: "Detailed view of patient visit records",
@@ -446,7 +447,7 @@ export const projects = [
       },
       // Doctor Portal
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_DOCTORMANAGMENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606696/Doctor-Portal-Doctor_Management_rq87ep.jpg",
         heading: "Physician Dashboard",
         subheading: "Doctor's Workflow Hub",
         description: "Optimized interface for patient management",
@@ -454,7 +455,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_DOCTORMANAGEMENT1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606706/Doctor-Portal-Doctor_Management_1_upgcdp.jpg",
         heading: "Doctor Management Interface",
         subheading: "Clinical Workflow Tools",
         description: "Comprehensive tools for daily clinical tasks",
@@ -462,7 +463,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_DOCTOR_ADD_NEWVISITS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606685/Doctor-Portal-Doctor-add_new_visit_aqgcpx.jpg",
         heading: "Add New Visit (Doctor)",
         subheading: "Patient Appointment Creation",
         description: "Create and schedule new patient visits",
@@ -470,7 +471,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_PATIENTDETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606699/Doctor-Portal-Doctor-Patient_Details_dhnhaf.jpg",
         heading: "Patient Details (Doctor View)",
         subheading: "Patient Medical Records",
         description: "Comprehensive patient information and history",
@@ -478,7 +479,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_PATIENTDETAILS1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606706/Doctor-Portal-Doctor-Patient_Details_1_gdjvvc.jpg",
         heading: "Patient Records (Extended)",
         subheading: "Detailed Medical History",
         description: "In-depth patient medical documentation",
@@ -486,7 +487,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_PATIENTDETAILS2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606695/Doctor-Portal-Doctor-Patient_Details1_mp0dzy.jpg",
         heading: "Patient Chart",
         subheading: "Clinical Documentation",
         description: "Patient charting and treatment notes",
@@ -494,7 +495,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTOL_PATIENTDETAILS3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606729/Doctor-Portal-Doctor-Patient_Details2_mhyt7v.jpg",
         heading: "Patient Summary",
         subheading: "Quick Patient Overview",
         description: "At-a-glance patient information",
@@ -502,7 +503,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_DOCTOR_PORTAL_DOCTOE_STAFFVISITS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606717/Doctor-Portal-Doctor-Staff-Visit_tmuylf.jpg",
         heading: "Staff Visit Coordination",
         subheading: "Team Collaboration",
         description: "Coordinate visits with staff members",
@@ -511,7 +512,7 @@ export const projects = [
       },
       // Patient Portal
       {
-        src: Images.HEALINK_PATIENT_PORTAL_PATIENTDETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606746/Patient-Portal-Doctor-Patient_Details_v7kmbq.jpg",
         heading: "Patient Portal",
         subheading: "Personal Health Dashboard",
         description: "Self-service portal for health records",
@@ -519,7 +520,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTAL_PATIENTDETAILS1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606737/Patient-Portal-Doctor-Patient_Details_1_kws3ob.jpg",
         heading: "Patient Information",
         subheading: "Personal Health Data",
         description: "Access personal medical information",
@@ -527,7 +528,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTAL_PATIENTDETAILS2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606762/Patient-Portal-Doctor-Patient_Details_2_ejvrhv.jpg",
         heading: "Medical History",
         subheading: "Health Records Timeline",
         description: "View complete medical history",
@@ -535,7 +536,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTAL_PATIENTDETAILS3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606767/Patient-Portal-Doctor-Patient_Details3_aorsp5.jpg",
         heading: "Treatment Plans",
         subheading: "Active Care Plans",
         description: "Current and upcoming treatments",
@@ -543,7 +544,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_PATIENT_REPORT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606725/Patiet_Report_t6tfbl.png",
         heading: "Patient Reports",
         subheading: "Medical Documentation",
         description: "Download and view medical reports",
@@ -552,7 +553,7 @@ export const projects = [
       },
       // Dental Charts
       {
-        src: Images.HEALINK_PATIENT_PORTAL_DENTALCHART_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606705/Patient-Portal-Dental-Chart_f8pbin.png",
         heading: "Interactive Dental Charting",
         subheading: "Visual Oral Health Documentation",
         description: "Visual tooth mapping with treatment history",
@@ -560,7 +561,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTOL_DENTALCHART_EXISTINGPROCEDURE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606710/Patient-Portal-Dental-Chart-Existing_Procedure_mrfyvr.png",
         heading: "Existing Dental Procedures",
         subheading: "Completed Treatments",
         description: "View completed dental procedures on chart",
@@ -568,7 +569,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTAL_DENTALCHART_PENDIND_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606710/Patient-Portal-Dental-Chart-Existing_Procedure_mrfyvr.png",
         heading: "Pending Dental Procedures",
         subheading: "Scheduled Treatments",
         description: "Upcoming dental procedures and appointments",
@@ -576,7 +577,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTAL_DENTALCHART_PENDIND2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606716/Patient-Portal-Dental-Chart-pending2_e8hxmz.png",
         heading: "Dental Treatment Queue",
         subheading: "Planned Procedures",
         description: "Queue of planned dental treatments",
@@ -584,7 +585,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HEALINK_PATIENT_PORTOL_DENTALCHART_WATCH_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606717/Patient-Portal-Dental-Chart-Watch_toyhls.png",
         heading: "Dental Monitoring",
         subheading: "Watch List Items",
         description: "Teeth requiring close monitoring",
@@ -593,7 +594,7 @@ export const projects = [
       },
       // Tooth Details
       {
-        src: Images.HEALINK_TOOTHDETAILS_WATCH_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606801/Tooth_Details-Watch_cnlgc6.jpg",
         heading: "Tooth Details - Monitoring",
         subheading: "Individual Tooth Status",
         description: "Detailed information for monitored tooth",
@@ -601,7 +602,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_TOOTHDETAILS_WATCH_V2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606792/Tooth_Details-Watch_V2_tskzxa.jpg",
         heading: "Tooth Details V2",
         subheading: "Enhanced Tooth View",
         description: "Updated tooth detail interface",
@@ -609,7 +610,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_TOOTHDETAILS_WATCH_V2PNG_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606784/Tooth_Details-Watch_V2_mzrou2.png",
         heading: "Tooth Details (PNG)",
         subheading: "High-Resolution View",
         description: "Clear visualization of tooth condition",
@@ -617,7 +618,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_TOOTHDETAILS_EXISTINGPROCEDURE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606794/Tooth-DetailsExistitng_Procedure_pf1apz.jpg",
         heading: "Tooth Treatment History",
         subheading: "Completed Procedures",
         description: "All procedures performed on specific tooth",
@@ -626,7 +627,7 @@ export const projects = [
       },
       // Staff Portal
       {
-        src: Images.HEALINK_STAFFPORTAL_ADDNEW_STAFF_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606748/Staff-Portal-Add_New_Staff_bgzarz.jpg",
         heading: "Add New Staff Member",
         subheading: "Staff Onboarding",
         description: "Register new staff in the system",
@@ -634,7 +635,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_STAFFPORTOL_STAFF_MANAGMENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606755/Staff-Portal-Staff_Management_qmfhcl.jpg",
         heading: "Staff Management",
         subheading: "Personnel Administration",
         description: "Comprehensive staff oversight and management",
@@ -642,7 +643,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.HEALINK_STAFFPORTOL_STAFF_ADDNEW_VISIT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606767/Staff-Portal-Staff-add_new_visit_yirw6d.jpg",
         heading: "Add Visit (Staff)",
         subheading: "Schedule Patient Appointment",
         description: "Staff interface for creating patient visits",
@@ -650,7 +651,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HEALINK_STAFFPORTOL_STAFF_DOCTORS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606783/-Staff-Portal-Staff-Doctors_njxd6p.jpg",
         heading: "Doctor Directory (Staff)",
         subheading: "Physician Lookup",
         description: "Access doctor information and availability",
@@ -658,7 +659,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HEALINK_STAFFPORTOL_STAFF_PATIENTDETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606797/Staff-Portal-Staff-Patient_Details_mfgraw.jpg",
         heading: "Patient Details (Staff View)",
         subheading: "Patient Information Access",
         description: "Staff access to patient records",
@@ -666,7 +667,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HEALINK_STAFFPORTOL_STAFFVISIT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773606778/Staff-Portal-Staff-Visit_l8mfse.jpg",
         heading: "Visit Management (Staff)",
         subheading: "Appointment Coordination",
         description: "Manage patient appointments and visits",
@@ -709,14 +710,14 @@ export const projects = [
       "A comprehensive tax filing web application built with React and Redux, featuring secure form validation.",
     longDescription:
       "eFile is a comprehensive digital tax and document management platform designed to streamline the filing process. Built with TypeScript and modern security standards for IRS compliance.",
-    image: Images.eFILE_HOME_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608023/Home_czwah5.jpg",
     color: colorSchemes.categories.finance,
     gradient: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
     icon: MdPayment,
     images: [
       // Login / Auth
       {
-        src: Images.eFILE_LOGIN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608033/Login_cqjkjh.jpg",
         heading: "Secure Tax Portal Login",
         subheading: "Enterprise-Grade Authentication",
         description: "Multi-factor authentication for secure access",
@@ -724,7 +725,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_MFA_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607992/MFA_c5w37a.jpg",
         heading: "Multi-Factor Authentication",
         subheading: "Enhanced Security Layer",
         description: "Additional security verification step",
@@ -732,7 +733,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_SECURITY_QUESTIONS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608145/Security_Question_t0stgp.jpg",
         heading: "Security Questions",
         subheading: "Account Verification",
         description: "Answer security questions for verification",
@@ -740,7 +741,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_SEQURITY_QUESTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608183/Sequrity_Quetions_elhkje.jpg",
         heading: "Security Question Setup",
         subheading: "Account Protection",
         description: "Configure security questions for account recovery",
@@ -748,7 +749,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_FORGOT_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607967/Forgot_password_ulreop.jpg",
         heading: "Password Recovery",
         subheading: "Account Recovery Flow",
         description: "Initiate password reset process",
@@ -756,7 +757,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_RESET_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608186/reset_password_kk6ijz.jpg",
         heading: "Reset Password",
         subheading: "Create New Password",
         description: "Set new password with security requirements",
@@ -764,7 +765,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.eFILE_CREATE_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607941/Create_password_sjpdpa.jpg",
         heading: "Password Creation",
         subheading: "Initial Password Setup",
         description: "Create secure password for new account",
@@ -773,7 +774,7 @@ export const projects = [
       },
       // Verification
       {
-        src: Images.eFILE_EMAIL_VERIFICATION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607941/Email_Verification_qq6ivy.jpg",
         heading: "Email Verification",
         subheading: "Confirm Email Address",
         description: "Verify email to activate account",
@@ -781,7 +782,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_EMAIL_VERIFICATION_FOR_FORGOT_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607954/Email_verification_for_forgot_password_belmby.jpg",
         heading: "Password Reset Verification",
         subheading: "Email Confirmation",
         description: "Verify email for password reset",
@@ -789,7 +790,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_NUMBER_VERIFICATION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608103/Number_verification_ijffn7.jpg",
         heading: "Phone Number Verification",
         subheading: "SMS Verification",
         description: "Verify phone number via SMS code",
@@ -798,7 +799,7 @@ export const projects = [
       },
       // Signup
       {
-        src: Images.eFILE_SIGNUP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608272/Sign_up_wz3uaz.jpg",
         heading: "Account Registration",
         subheading: "New User Signup",
         description: "Create new eFile account",
@@ -806,7 +807,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_SIGNUP_USERINFO_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608190/Sign_Up_user_info_qy4gre.jpg",
         heading: "User Information",
         subheading: "Complete Profile",
         description: "Enter detailed user information",
@@ -814,7 +815,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.eFILE_ACCESS_CODE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607822/Access_Codes_wugelg.jpg",
         heading: "Access Code Entry",
         subheading: "Special Access",
         description: "Enter access code for premium features",
@@ -823,7 +824,7 @@ export const projects = [
       },
       // Home & Dashboard
       {
-        src: Images.eFILE_HOME_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608023/Home_czwah5.jpg",
         heading: "Tax Management Dashboard",
         subheading: "Central Command Center",
         description: "Overview of filing activity and quick actions",
@@ -831,7 +832,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.eFILE_HOME1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608015/Home_1_ya2cz2.jpg",
         heading: "Dashboard Overview",
         subheading: "Filing Status",
         description: "Comprehensive filing status and analytics",
@@ -839,7 +840,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_TOOLTIPS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608259/tooltips_fdb9yb.jpg",
         heading: "Interactive Tooltips",
         subheading: "Contextual Help",
         description: "Helpful tooltips throughout the interface",
@@ -847,7 +848,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_TOOLTIP_BEHAVIOUR_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608258/Tool_tip_behaviour_uxpdkl.jpg",
         heading: "Tooltip Interactions",
         subheading: "User Guidance",
         description: "Interactive help system behavior",
@@ -856,7 +857,7 @@ export const projects = [
       },
       // Profile & Account
       {
-        src: Images.eFILE_MY_INFO_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608018/My_info_huftnd.jpg",
         heading: "My Information",
         subheading: "User Profile",
         description: "Personal information and settings",
@@ -864,7 +865,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_MY_INFO1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608011/My_info_1_eyseng.jpg",
         heading: "Profile Details",
         subheading: "Account Information",
         description: "Detailed account settings",
@@ -872,7 +873,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_MY_INFO2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608024/My_info_2_fdbzhe.jpg",
         heading: "Profile Management",
         subheading: "Edit Information",
         description: "Update personal details",
@@ -880,7 +881,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_COMPANY_INFO_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607879/Com_pany_Info_wiqyo4.jpg",
         heading: "Company Information",
         subheading: "Business Details",
         description: "Manage company tax information",
@@ -888,7 +889,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_USER_DETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608265/User_Details_mnuptv.jpg",
         heading: "User Details",
         subheading: "Complete Profile",
         description: "Comprehensive user information",
@@ -896,7 +897,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_TRANSFER_ACCOUNT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608250/tRANSFER_ACCOUNT_dphmql.jpg",
         heading: "Account Transfer",
         subheading: "Ownership Transfer",
         description: "Transfer account to another user",
@@ -904,16 +905,16 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_ERROR_BEHAVIOUR_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607949/eRROR_behaviour_e41d1q.jpg",
         heading: "Error Handling",
         subheading: "User-Friendly Errors",
         description: "Clear error messages and resolution steps",
         icon: MdCode,
-        color: colorSchemes.error?.main || "#EF4444",
+        color: colorSchemes.danger.main,
       },
       // Payers
       {
-        src: Images.eFILE_PAYER_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608070/Payers_eew8f9.jpg",
         heading: "Payer Management",
         subheading: "Financial Entity Tracking",
         description: "Comprehensive payer directory",
@@ -921,7 +922,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.eFILE_PAYER1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608090/Payers_1_qefkvb.jpg",
         heading: "Payer Listing",
         subheading: "All Payers",
         description: "Complete list of registered payers",
@@ -929,7 +930,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.eFILE_PAYER2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608097/Payers_2_ot799h.jpg",
         heading: "Payer Details",
         subheading: "Payer Information",
         description: "Detailed payer records",
@@ -937,7 +938,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_PAYER3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608115/Payers_3_ur75pi.jpg",
         heading: "Payer Overview",
         subheading: "Payer Summary",
         description: "Quick payer information snapshot",
@@ -945,7 +946,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_ADD_PAYER_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607850/Add_Payer_ijlvb5.jpg",
         heading: "Add New Payer",
         subheading: "Payer Registration",
         description: "Register new payer in the system",
@@ -954,7 +955,7 @@ export const projects = [
       },
       // Recipients
       {
-        src: Images.eFILE_ADD_RECIPIENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607859/Add_Recipient_zzzrt1.jpg",
         heading: "Add Recipient",
         subheading: "Recipient Registration",
         description: "Add new tax form recipient",
@@ -963,7 +964,7 @@ export const projects = [
       },
       // Forms
       {
-        src: Images.eFILE_FORMS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607939/Forms_yokqmo.jpg",
         heading: "Tax Forms Center",
         subheading: "Comprehensive Form Directory",
         description: "Centralized hub for all tax forms",
@@ -971,7 +972,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_SELECT_FORM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608168/select_form_wzsk02.jpg",
         heading: "Form Selection",
         subheading: "Choose Tax Form",
         description: "Select appropriate tax form type",
@@ -979,7 +980,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_1099_INT_CREATE_FORM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607863/1099-MISC_cREATE_fORM_c2rzdq.jpg",
         heading: "1099-MISC Form Builder",
         subheading: "IRS-Compliant Form Creation",
         description: "Step-by-step 1099-MISC wizard",
@@ -987,7 +988,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_1099_INT_CREATE_FORM1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607878/1099-INT_cREATE_fORM_mw4bhx.jpg",
         heading: "1099-INT Form",
         subheading: "Interest Income Form",
         description: "Create 1099-INT tax form",
@@ -995,7 +996,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_1099_INT_CREATE_FORM2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607865/1099-INT_cREATE_fORM_2_cmmbyw.jpg",
         heading: "1099-INT Details",
         subheading: "Form Data Entry",
         description: "Enter detailed form information",
@@ -1003,7 +1004,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_1099_INT_CREATE_FORM3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607852/1099-INT_cREATE_fORM_1_k2oqo7.jpg",
         heading: "1099-INT Review",
         subheading: "Form Validation",
         description: "Review and validate form data",
@@ -1012,7 +1013,7 @@ export const projects = [
       },
       // Preview / Print / PDF
       {
-        src: Images.eFILE_PDFSHARE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608097/PDF_SHARE_ud7w3c.jpg",
         heading: "PDF Sharing",
         subheading: "Document Distribution",
         description: "Share completed tax forms as PDF",
@@ -1020,7 +1021,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_PRINT_SCREEN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608132/Print_screen_fzbyrq.jpg",
         heading: "Print Preview",
         subheading: "Document Preview",
         description: "Preview before printing",
@@ -1028,7 +1029,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_PRINT_SCREEN1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608100/Print_screen_1_y9dlqo.jpg",
         heading: "Print Options",
         subheading: "Printing Configuration",
         description: "Configure print settings",
@@ -1036,7 +1037,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_PRINT_SCREEN2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608133/Print_screen_2_pguglk.jpg",
         heading: "Print Layout",
         subheading: "Document Format",
         description: "Choose print layout and format",
@@ -1044,7 +1045,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_PRINT_SCREENIRS_WITH_PRINTOPTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608138/Print_screen_IRS_with_print_option_brcrlw.jpg",
         heading: "IRS Copy - Print",
         subheading: "Official IRS Copy",
         description: "Print IRS-compliant copy",
@@ -1052,7 +1053,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.eFILE_PRINT_SCREENIRS_WITH_DOWNLOADOPTIOM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608138/Print_screen_IRS_with_download_option_kuqifv.jpg",
         heading: "IRS Copy - Download",
         subheading: "Digital IRS Copy",
         description: "Download official IRS copy",
@@ -1060,7 +1061,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.eFILE_SUMMARY_FORM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608238/sUMMARY_Form_preview_aqfxsf.jpg",
         heading: "Summary Form Preview",
         subheading: "Form Summary",
         description: "Overview of completed forms",
@@ -1068,7 +1069,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.eFILE_SUMMARY_PRINT_SCREEN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608260/summary_Print_screen_q7huac.jpg",
         heading: "Summary Print",
         subheading: "Print Summary",
         description: "Print form summaries",
@@ -1076,7 +1077,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_SUMMARY_PRINT_SCREEN1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608197/SUMMARY_Print_screen_1_n4w9fh.jpg",
         heading: "Summary Print Options",
         subheading: "Print Configuration",
         description: "Configure summary print settings",
@@ -1084,7 +1085,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.eFILE_SUMMARY_PRINTSCREEN_IRS_WITHPRINT_OPTION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608259/Summary_Print_screen_IRS_with_print_option_n1wmmw.jpg",
         heading: "IRS Summary Print",
         subheading: "Official Summary",
         description: "Print IRS-compliant summary",
@@ -1093,7 +1094,7 @@ export const projects = [
       },
       // Orders
       {
-        src: Images.eFILE_ORDER_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773608050/Orders_u43y5t.jpg",
         heading: "Order Management",
         subheading: "Filing Orders",
         description: "Track and manage filing orders",
@@ -1102,12 +1103,12 @@ export const projects = [
       },
       // Miscellaneous
       {
-        src: Images.eFILE_LEAVE_FORM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773607976/Leave_form_btyga4.jpg",
         heading: "Leave Form Warning",
         subheading: "Unsaved Changes",
         description: "Warning before leaving unsaved form",
         icon: MdSecurity,
-        color: colorSchemes.error?.main || "#EF4444",
+        color: colorSchemes.danger.main,
       },
     ],
     technologies: [
@@ -1147,14 +1148,14 @@ export const projects = [
       "Valor Sport Card is a comprehensive platform for sports enthusiasts.",
     longDescription:
       "A complete sports card marketplace platform built for collectors and enthusiasts. Features real-time tracking, secure payments, and comprehensive analytics.",
-    image: Images.VALOR_SPORT_CARD_DASHBOARD_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601382/Dashbaord_poommw.jpg",
     color: colorSchemes.categories.ecommerce,
     gradient: "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
     icon: MdDashboard,
     images: [
       // Auth
       {
-        src: Images.VALOR_SPORT_CARD_LOGIN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601287/LOGIN_co3k7i.jpg",
         heading: "Platform Login",
         subheading: "Secure Member Authentication",
         description: "Sports enthusiast-focused authentication",
@@ -1162,7 +1163,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_SIGNUP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601414/SIGNUp_xcufde.jpg",
         heading: "Member Registration",
         subheading: "Join the Community",
         description: "Create collector account",
@@ -1170,7 +1171,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_FORGET_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601294/Forget_Password_1_uuc36p.jpg",
         heading: "Password Recovery",
         subheading: "Account Recovery",
         description: "Reset forgotten password",
@@ -1178,7 +1179,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_VERIFICATION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601426/Verification_fcmblt.jpg",
         heading: "Account Verification",
         subheading: "Email Confirmation",
         description: "Verify account via email",
@@ -1186,7 +1187,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_NEW_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601322/New_Password_lrjoww.jpg",
         heading: "New Password Setup",
         subheading: "Create Secure Password",
         description: "Set new account password",
@@ -1195,7 +1196,7 @@ export const projects = [
       },
       // Dashboard & Main
       {
-        src: Images.VALOR_SPORT_CARD_DASHBOARD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601382/Dashbaord_poommw.jpg",
         heading: "Member Dashboard",
         subheading: "Personalized Sports Card Center",
         description: "Engaging dashboard with card overview and stats",
@@ -1203,7 +1204,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_HOMEDARK1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601381/Home_dark1_rtuiyh.jpg",
         heading: "Dark Mode Dashboard",
         subheading: "Alternative Theme",
         description: "Dashboard in dark mode theme",
@@ -1211,7 +1212,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ANALYTICS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601223/Analytics_kqeycy.jpg",
         heading: "Performance Analytics",
         subheading: "Collection Insights",
         description: "Data-driven insights for collectors",
@@ -1219,7 +1220,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_GRADING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601344/Grading_cbc0c1.jpg",
         heading: "Card Grading System",
         subheading: "Quality Assessment",
         description: "Professional card grading interface",
@@ -1227,7 +1228,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_SETTING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601422/Setting_bqwngs.jpg",
         heading: "Account Settings",
         subheading: "Preferences & Configuration",
         description: "Manage account preferences",
@@ -1236,7 +1237,7 @@ export const projects = [
       },
       // Admin
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_DASHBOARD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601251/Admin_Dashbaord_k3axg1.jpg",
         heading: "Admin Dashboard",
         subheading: "Platform Management",
         description: "Administrative control center",
@@ -1244,7 +1245,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_ORDERS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601222/Admin_orders_mxn60l.jpg",
         heading: "Order Management (Admin)",
         subheading: "All Platform Orders",
         description: "Manage all customer orders",
@@ -1252,7 +1253,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_ORDERS1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601244/Admin_orders_1_sijyd5.jpg",
         heading: "Order Details (Admin)",
         subheading: "Order Information",
         description: "Detailed order management",
@@ -1260,7 +1261,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_PAYMENTS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601235/Admin_Payments_pvytuy.jpg",
         heading: "Payment Management (Admin)",
         subheading: "Financial Overview",
         description: "Track all platform payments",
@@ -1268,7 +1269,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_APIKEYS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601212/Admin__APi_Keys_qnt8t6.jpg",
         heading: "API Key Management",
         subheading: "Integration Keys",
         description: "Manage API keys for integrations",
@@ -1276,7 +1277,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ADMIN_APIKEYS1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601215/Admin__APi_Keys_1_n6lxuo.jpg",
         heading: "API Configuration",
         subheading: "Developer Settings",
         description: "Configure API access and permissions",
@@ -1285,7 +1286,7 @@ export const projects = [
       },
       // Orders & Tracking
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_TRACKING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601363/Order_Tracking_e0fquc.jpg",
         heading: "Real-Time Order Tracking",
         subheading: "Shipment Status Monitoring",
         description: "Live tracking with delivery estimates",
@@ -1293,7 +1294,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_TRACKING1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601393/Order_Tracking_1_nnmvk6.jpg",
         heading: "Tracking Details",
         subheading: "Shipment Timeline",
         description: "Detailed tracking information",
@@ -1301,7 +1302,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_TRACKING2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601341/Order_Tracking_2_hu8pes.jpg",
         heading: "Delivery Status",
         subheading: "Order Progress",
         description: "Current delivery status",
@@ -1309,7 +1310,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_STATUSPOPUP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601335/order_status_popup_zjupse.jpg",
         heading: "Order Status Modal",
         subheading: "Quick Status Check",
         description: "Popup with order status details",
@@ -1318,7 +1319,7 @@ export const projects = [
       },
       // Order Submission
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_SUBMISSIONFORM_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601375/Order_Submission_Form_jdvjvp.jpg",
         heading: "Order Submission Form",
         subheading: "New Order Creation",
         description: "Submit cards for grading",
@@ -1326,7 +1327,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_ORDER_SUBMISSIONFORM_ENTER_DETAIL_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601355/Order_Submission_Form___Enter_Details_rzex3y.jpg",
         heading: "Order Details Entry",
         subheading: "Card Information",
         description: "Enter detailed card information",
@@ -1335,7 +1336,7 @@ export const projects = [
       },
       // Payments
       {
-        src: Images.VALOR_SPORT_CARD_CARD_PAYMENT_FLOW_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601254/Card_Payment_Flow_gxfxvz.jpg",
         heading: "Card Payment Flow",
         subheading: "Credit Card Processing",
         description: "Secure card payment interface",
@@ -1343,7 +1344,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_TRANSFER_PAYMENTFLOW_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601413/Transfer_Payment_Flow_fym5xl.jpg",
         heading: "Transfer Payment Flow",
         subheading: "Bank Transfer",
         description: "Alternative payment via transfer",
@@ -1351,7 +1352,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_PAYMENT_MANAGEMENT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601387/Payment_Management_e6essr.jpg",
         heading: "Payment Management",
         subheading: "Payment History",
         description: "Track and manage payments",
@@ -1360,7 +1361,7 @@ export const projects = [
       },
       // Pricing & Sales
       {
-        src: Images.VALOR_SPORT_CARD_PRICING_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601416/Pricing_lx6rdj.jpg",
         heading: "Pricing Plans",
         subheading: "Service Tiers",
         description: "Choose grading service level",
@@ -1368,7 +1369,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_SALES_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601390/Sales_mmcmqx.jpg",
         heading: "Sales Dashboard",
         subheading: "Revenue Analytics",
         description: "Track sales and revenue",
@@ -1377,7 +1378,7 @@ export const projects = [
       },
       // Card Details
       {
-        src: Images.VALOR_SPORT_CARD_CARD_DETAILS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601312/card_details_rju86t.jpg",
         heading: "Card Detail View",
         subheading: "Complete Card Information",
         description: "Comprehensive card specifications",
@@ -1386,7 +1387,7 @@ export const projects = [
       },
       // Order Completion
       {
-        src: Images.VALOR_SPORT_CARD_CARD_ORDER_COMPLETE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601232/Card_Order_complete_ftp34r.jpg",
         heading: "Card Order Complete",
         subheading: "Payment Confirmation",
         description: "Card payment successful",
@@ -1394,7 +1395,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_TRANSFER_ORDERCOMPLETE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601406/Transfer_Order_complete_qkaphg.jpg",
         heading: "Transfer Order Complete",
         subheading: "Transfer Confirmation",
         description: "Bank transfer successful",
@@ -1403,7 +1404,7 @@ export const projects = [
       },
       // Miscellaneous
       {
-        src: Images.VALOR_SPORT_CARD_CONGRATS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601266/Congrats_imciyx.jpg",
         heading: "Congratulations",
         subheading: "Success Message",
         description: "Order successfully completed",
@@ -1411,7 +1412,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_SUCCESS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601416/Success_rdpgdh.jpg",
         heading: "Success Confirmation",
         subheading: "Action Complete",
         description: "Operation completed successfully",
@@ -1419,7 +1420,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.VALOR_SPORT_CARD_DATAPOPUP_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773601243/date_popup_syrhgs.jpg",
         heading: "Date Picker",
         subheading: "Date Selection",
         description: "Calendar popup for date selection",
@@ -1464,14 +1465,14 @@ export const projects = [
       "ParryScript is an online medical marketplace platform connecting buyers, sellers, and pharmacies.",
     longDescription:
       "A comprehensive medical marketplace platform that connects patients, pharmacies, and sellers. Built with security and compliance in mind.",
-    image: Images.PARRYSCRIPT_PARRY_SCRIPT_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603783/Parry_Script_xf1rhd.jpg",
     color: colorSchemes.categories.medical,
     gradient: "linear-gradient(135deg, #EC4899 0%, #DB2777 100%)",
     icon: MdDashboard,
     images: [
       // Landing & Auth
       {
-        src: Images.PARRYSCRIPT_PARRY_SCRIPT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603783/Parry_Script_xf1rhd.jpg",
         heading: "Platform Landing",
         subheading: "Medical Marketplace Gateway",
         description: "Conversion-focused landing page",
@@ -1479,7 +1480,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.PARRYSCRIPT_SIGN_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603838/signin_enhorn.jpg",
         heading: "Sign In",
         subheading: "User Authentication",
         description: "Secure login for all user types",
@@ -1487,7 +1488,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.PARRYSCRIPT_CREATE_NEW_ACCOUNT_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603728/createnewacc_elk2rt.jpg",
         heading: "Create New Account",
         subheading: "User Registration",
         description: "Register as buyer, seller, or pharmacy",
@@ -1495,7 +1496,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.PARRYSCRIPT_FORGET_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603749/forget_pss_a2uynt.jpg",
         heading: "Forget Password",
         subheading: "Password Recovery",
         description: "Reset forgotten password",
@@ -1503,7 +1504,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.PARRYSCRIPT_RESET_PASSWORD_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603756/resetpassword_kw2ux0.jpg",
         heading: "Reset Password",
         subheading: "New Password Creation",
         description: "Create new secure password",
@@ -1511,7 +1512,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.PARRYSCRIPT_EMAILVERIFICATION_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603728/emailverification_jwjd1i.jpg",
         heading: "Email Verification",
         subheading: "Account Confirmation",
         description: "Verify email address",
@@ -1520,7 +1521,7 @@ export const projects = [
       },
       // Buyer Flow
       {
-        src: Images.PARRYSCRIPT_BUYERFLOW_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603746/byerflow_q5udmy.jpg",
         heading: "Medicine Browse",
         subheading: "Product Discovery Interface",
         description: "Intuitive catalog with search and filters",
@@ -1528,7 +1529,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.PARRYSCRIPT_BUYERFLOW2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603719/buyerflow2_wvdua4.jpg",
         heading: "Product Listing",
         subheading: "Browse Medicines",
         description: "Comprehensive product catalog",
@@ -1536,7 +1537,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.PARRYSCRIPT_BUYERFLOW3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603710/buyerflow3_bgyorh.jpg",
         heading: "Product Details",
         subheading: "Medicine Information",
         description: "Detailed product specifications",
@@ -1544,7 +1545,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.PARRYSCRIPT_BUYERFLOW4_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603704/buyerflow4_uhnqph.jpg",
         heading: "Shopping Cart",
         subheading: "Order Review",
         description: "Review items before purchase",
@@ -1552,7 +1553,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.PARRYSCRIPT_BUYERFLOW5_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603693/buyerflow5_fuvtqv.jpg",
         heading: "Checkout Process",
         subheading: "Complete Purchase",
         description: "Secure payment and delivery",
@@ -1561,7 +1562,7 @@ export const projects = [
       },
       // Seller Flow
       {
-        src: Images.PARRYSCRIPT_SELLERFLOW_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603808/sellerflow_s2ce7a.jpg",
         heading: "Seller Dashboard",
         subheading: "Pharmacy Business Overview",
         description: "Business-focused dashboard",
@@ -1569,7 +1570,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLERFLOW1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603834/sellerflow1_s0sjfo.jpg",
         heading: "Product Management",
         subheading: "Inventory Control",
         description: "Manage product listings",
@@ -1577,7 +1578,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLERFLOW2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603821/sellerflow2_rxxrgi.jpg",
         heading: "Order Management",
         subheading: "Process Orders",
         description: "Handle incoming orders",
@@ -1585,7 +1586,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLERFLOW3_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603831/sellerflow3_vecark.jpg",
         heading: "Sales Analytics",
         subheading: "Business Insights",
         description: "Track sales performance",
@@ -1593,7 +1594,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLERFLOW4_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603824/sellerflow4_al1cad.jpg",
         heading: "Seller Settings",
         subheading: "Business Configuration",
         description: "Manage store settings",
@@ -1602,7 +1603,7 @@ export const projects = [
       },
       // Income/Orders
       {
-        src: Images.PARRYSCRIPT_BUYERINCOME_ORDER_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603732/buyerincomeorder1_sbwojf.jpg",
         heading: "Buyer Order History",
         subheading: "Purchase Records",
         description: "View all past orders",
@@ -1610,7 +1611,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.PARRYSCRIPT_BUYINCOME_ORDER2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603702/buyerincomeorder2_usblsn.jpg",
         heading: "Order Details",
         subheading: "Purchase Information",
         description: "Detailed order breakdown",
@@ -1618,7 +1619,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLER_INCOMESALE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603844/sellerincomesale1_fu7jbh.jpg",
         heading: "Seller Income Dashboard",
         subheading: "Sales Revenue",
         description: "Track sales and earnings",
@@ -1626,7 +1627,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.PARRYSCRIPT_SELLER_INCOMESALE2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603836/sellerincomesale2_y9ebmr.jpg",
         heading: "Sales Report",
         subheading: "Revenue Analytics",
         description: "Detailed sales breakdown",
@@ -1635,7 +1636,7 @@ export const projects = [
       },
       // Pharmacy
       {
-        src: Images.PARRYSCRIPT_PHARMACYDETail_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603776/pharmacy_detail_bm9dlh.jpg",
         heading: "Pharmacy Profile",
         subheading: "Provider Information & Verification",
         description: "Trust-building pharmacy profiles",
@@ -1644,7 +1645,7 @@ export const projects = [
       },
       // Profile
       {
-        src: Images.PARRYSCRIPT_PROFILE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603782/prof_afuldm.jpg",
         heading: "User Profile",
         subheading: "Account Information",
         description: "Manage personal details",
@@ -1653,7 +1654,7 @@ export const projects = [
       },
       // Notifications
       {
-        src: Images.PARRYSCRIPT_NOTIFICATION1_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603747/notification1_oq9aqe.jpg",
         heading: "Notification Center",
         subheading: "Activity & Alert Management",
         description: "Centralized communication hub",
@@ -1661,7 +1662,7 @@ export const projects = [
         color: colorSchemes.secondary.main,
       },
       {
-        src: Images.PARRYSCRIPT_NOTIFICAION2_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773603777/notification2_ltaulr.jpg",
         heading: "Notification Details",
         subheading: "Alert Information",
         description: "Detailed notification view",
@@ -1705,13 +1706,13 @@ export const projects = [
       "HRChromatics is a modern web platform showcasing creative content, articles, and services.",
     longDescription:
       "A content-rich platform designed for showcasing creative work, services, and articles. Built with Next.js for optimal SEO and performance.",
-    image: Images.HRCHROMATICS_HOME_PAGE_IMG,
+    image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610486/Home_Page_ucycgu.jpg",
     color: colorSchemes.categories.content,
     gradient: "linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)",
     icon: MdDashboard,
     images: [
       {
-        src: Images.HRCHROMATICS_HOME_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610486/Home_Page_ucycgu.jpg",
         heading: "Homepage & Brand Showcase",
         subheading: "Digital Presence Hub",
         description: "Engaging homepage with modern design",
@@ -1719,7 +1720,7 @@ export const projects = [
         color: colorSchemes.primary.main,
       },
       {
-        src: Images.HRCHROMATICS_BLOG_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610478/Blog_Page_ftxiib.jpg",
         heading: "Content Blog",
         subheading: "Article Discovery",
         description: "Content-rich blog with categories",
@@ -1727,7 +1728,7 @@ export const projects = [
         color: colorSchemes.success.main,
       },
       {
-        src: Images.HRCHROMATICS_ARTICLE_PAGE_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610477/Article_Page_kff4qc.jpg",
         heading: "Article Page",
         subheading: "Content Reading Experience",
         description: "Clean article layout with rich formatting",
@@ -1735,7 +1736,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HRCHROMATICS_SERVICES_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610482/Services_qjwp77.jpg",
         heading: "Services Portfolio",
         subheading: "Offering Catalog",
         description: "Comprehensive service presentation",
@@ -1743,7 +1744,7 @@ export const projects = [
         color: colorSchemes.info.main,
       },
       {
-        src: Images.HRCHROMATICS_ABOUTUS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610479/About_Us_yik8r9.jpg",
         heading: "About Us",
         subheading: "Company Information",
         description: "Trust-building company story",
@@ -1751,7 +1752,7 @@ export const projects = [
         color: colorSchemes.warning.main,
       },
       {
-        src: Images.HRCHROMATICS_CONTACTUS_IMG,
+        src: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773610465/Contact_Us_c19xka.jpg",
         heading: "Contact Portal",
         subheading: "Communication Gateway",
         description: "Accessible contact form and information",
@@ -1786,4 +1787,5 @@ export const projects = [
     ],
   },
 ];
-export default projects 
+
+export default projects;
