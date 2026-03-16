@@ -1,8 +1,6 @@
 // ==========================================================================================
 // COMPLETE PORTFOLIO DATA - ALL EXPORTS INCLUDED
 // ==========================================================================================
-import React from "react";
-import Images from "../Helper/ImagesConstant";
 import ResumeDownload from "../assets/Common/Muhammad Usman.pdf";
 
 // ==================== REACT ICONS IMPORTS ====================
@@ -190,7 +188,7 @@ export const personalInfo = {
   email: "m.usman.stack@gmail.com",
   phone: "+92 303 7777438",
   location: "Lahore, Pakistan",
-  image: Images.USMAN_IMG,
+  image: "https://res.cloudinary.com/dvgpgzibx/image/upload/v1773609701/me_xmd4lo.jpg",
   bio: "I am a passionate Frontend Developer specializing in React.js, Next.js, UI/UX, and modern interactive web experiences. I build highly responsive, fast, and visually stunning interfaces that push the boundaries of web development.",
   longBio:
     "As a dedicated Frontend Developer with 2+ years of professional experience, I transform complex problems into elegant, user-friendly solutions. My expertise spans across modern JavaScript frameworks, with a particular focus on React ecosystem and interactive UI/UX design. I'm currently pursuing my BSCS degree while working full-time at Argonteq, where I've successfully delivered 20+ production-ready projects.",
@@ -253,7 +251,7 @@ export const heroData = {
       color: colorSchemes.secondary.main,
     },
   ],
-  splineScene: "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
+  // splineScene: "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
   stats: [
     {
       number: "20+",
@@ -500,7 +498,7 @@ export const experience = [
   {
     id: 1,
     company: "Argonteq",
-    companyLogo:Images.ARGON_IMG,
+    companyLogo:"https://res.cloudinary.com/dvgpgzibx/image/upload/v1773609689/Argontechdark-logo_hrblyd.png",
     position: "Frontend Developer",
     duration: "January 2023 – Present",
     location: "Lahore, Pakistan",
@@ -970,12 +968,12 @@ export const faqs = [
 // ==========================
 // SPLINE SCENES
 // ==========================
-export const splineScenes = {
-  hero: "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
-  about: "https://prod.spline.design/XKVkKqZBZ7Iq8wF9/scene.splinecode",
-  projects: "https://prod.spline.design/9aXFqq1kf3rGBDfD/scene.splinecode",
-  contact: "https://prod.spline.design/2M3W5rqXKP5v3pVr/scene.splinecode",
-};
+// export const splineScenes = {
+//   hero: "https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode",
+//   about: "https://prod.spline.design/XKVkKqZBZ7Iq8wF9/scene.splinecode",
+//   projects: "https://prod.spline.design/9aXFqq1kf3rGBDfD/scene.splinecode",
+//   contact: "https://prod.spline.design/2M3W5rqXKP5v3pVr/scene.splinecode",
+// };
 
 // ==========================
 // METADATA FOR SEO
@@ -1011,7 +1009,7 @@ export default {
   services,
   contactInfo,
   faqs,
-  splineScenes,
+  // splineScenes,
   siteMetadata,
   colorSchemes,
   animationVariants,
