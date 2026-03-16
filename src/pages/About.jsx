@@ -1,7 +1,7 @@
 // src/pages/About.jsx
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import projects from "../data/projects";
 import {
   personalInfo,
@@ -9,7 +9,6 @@ import {
   education,
   services,
   skills,
-  splineScenes,
 } from "../data/portfolioData";
 import {
   FiArrowRight,
@@ -21,18 +20,12 @@ import {
   FiTarget,
   FiTrendingUp,
   FiUsers,
-  FiCoffee,
   FiMail,
   FiDownload,
   FiCheckCircle,
   FiStar,
 } from "react-icons/fi";
 import { FaGamepad } from "react-icons/fa";
-
-// ========================================
-// LAZY LOAD SPLINE (prevents mobile crash)
-// ========================================
-const Spline = lazy(() => import("@splinetool/react-spline"));
 
 // ========================================
 // FRAMER MOTION VARIANTS
@@ -50,15 +43,77 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+// ========================================
+// DECORATIVE BACKGROUND COMPONENT
+// ========================================
+function HeroBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Radial gradient blobs */}
+      <div
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20"
+        style={{
+          background:
+            "radial-gradient(circle, #7c3aed 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute top-1/2 -right-40 w-[500px] h-[500px] rounded-full opacity-15"
+        style={{
+          background:
+            "radial-gradient(circle, #a855f7 0%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-1/3 w-[400px] h-[400px] rounded-full opacity-10"
+        style={{
+          background:
+            "radial-gradient(circle, #eab308 0%, transparent 70%)",
+          filter: "blur(70px)",
+        }}
+      />
 
-const slideIn = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-};
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(139,92,246,0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(139,92,246,0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Floating dots */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-violet-400"
+          style={{
+            width: Math.random() * 4 + 2,
+            height: Math.random() * 4 + 2,
+            left: `${10 + i * 7.5}%`,
+            top: `${15 + (i % 4) * 20}%`,
+            opacity: 0.3 + (i % 3) * 0.15,
+          }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 3 + (i % 3),
+            repeat: Infinity,
+            delay: i * 0.4,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 // ========================================
 // COMPONENT
@@ -77,17 +132,11 @@ export default function About() {
     <div className="about-page bg-slate-950 text-slate-100 overflow-x-hidden">
       {/* ==================== 1. HERO SECTION ==================== */}
       <section className="about-hero min-h-screen relative flex items-center overflow-hidden pt-20">
-        {/* Spline Background - Only on Desktop */}
-        {!isMobile && (
-          <div className="spline-bg absolute inset-0 pointer-events-none opacity-10">
-            <Suspense fallback={null}>
-              <Spline scene={splineScenes.about} />
-            </Suspense>
-          </div>
-        )}
+        {/* Decorative Background */}
+        <HeroBackground />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/80 pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 py-10 sm:py-16 lg:py-20">
           <motion.div

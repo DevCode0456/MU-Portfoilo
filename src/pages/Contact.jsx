@@ -1,8 +1,8 @@
 // src/pages/Contact.jsx
 import { motion, AnimatePresence } from "framer-motion";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { contactInfo, faqs, splineScenes } from "../data/portfolioData";
+import { contactInfo, faqs } from "../data/portfolioData";
 import {
   FiMail,
   FiGithub,
@@ -16,11 +16,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { FaUpwork } from "react-icons/fa6";
 
 // ========================================
-// LAZY LOAD SPLINE (prevents mobile crash)
-// ========================================
-const Spline = lazy(() => import("@splinetool/react-spline"));
-
-// ========================================
 // EMAILJS CONFIG
 // ========================================
 const EMAILJS_SERVICE_ID = "service_rj2855v";
@@ -31,11 +26,6 @@ const EMAILJS_PUBLIC_KEY = "EagOiXT3VHg0mrEcL";
 // ========================================
 // FRAMER MOTION VARIANTS
 // ========================================
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -48,6 +38,72 @@ const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
+
+// ========================================
+// DECORATIVE BACKGROUND COMPONENT
+// ========================================
+function HeroBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Radial gradient blobs */}
+      <div
+        className="absolute -top-20 right-0 w-[500px] h-[500px] rounded-full opacity-20"
+        style={{
+          background: "radial-gradient(circle, #7c3aed 0%, transparent 70%)",
+          filter: "blur(70px)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 -left-20 w-[400px] h-[400px] rounded-full opacity-15"
+        style={{
+          background: "radial-gradient(circle, #a855f7 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full opacity-10"
+        style={{
+          background: "radial-gradient(ellipse, #eab308 0%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
+
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(139,92,246,0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(139,92,246,0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Floating dots */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-violet-400"
+          style={{
+            width: Math.random() * 4 + 2,
+            height: Math.random() * 4 + 2,
+            left: `${8 + i * 9}%`,
+            top: `${20 + (i % 3) * 25}%`,
+            opacity: 0.25 + (i % 3) * 0.15,
+          }}
+          animate={{ y: [0, -18, 0], opacity: [0.25, 0.55, 0.25] }}
+          transition={{
+            duration: 3 + (i % 3),
+            repeat: Infinity,
+            delay: i * 0.35,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 // ========================================
 // CONTACT FORM COMPONENT
@@ -66,48 +122,32 @@ function ContactForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: "" });
-    }
+    setFormState({ ...formState, [name]: value });
+    if (errors[name]) setErrors({ ...errors, [name]: "" });
   };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formState.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
+    if (!formState.name.trim()) newErrors.name = "Name is required";
     if (!formState.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
       newErrors.email = "Email is invalid";
     }
-
     if (!formState.message.trim()) {
       newErrors.message = "Message is required";
     } else if (formState.message.trim().length < 10) {
       newErrors.message = "Message must be at least 10 characters";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setIsSubmitting(true);
 
-    // IMPORTANT: These keys MUST match {{variable}} names in your EmailJS templates
     const templateParams = {
       name: formState.name,
       email: formState.email,
@@ -116,27 +156,12 @@ function ContactForm() {
     };
 
     try {
-      // Send BOTH emails concurrently
       await Promise.all([
-        // Email 1: Welcome email → sent TO the user
-        emailjs.send(
-          EMAILJS_SERVICE_ID,
-          WELCOME_TEMPLATE_ID,
-          templateParams,
-          EMAILJS_PUBLIC_KEY,
-        ),
-        // Email 2: Notification email → sent TO you (owner)
-        emailjs.send(
-          EMAILJS_SERVICE_ID,
-          NOTIFY_TEMPLATE_ID,
-          templateParams,
-          EMAILJS_PUBLIC_KEY,
-        ),
+        emailjs.send(EMAILJS_SERVICE_ID, WELCOME_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY),
+        emailjs.send(EMAILJS_SERVICE_ID, NOTIFY_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY),
       ]);
 
       setIsSuccess(true);
-
-      // Reset form after 3 seconds
       setTimeout(() => {
         setIsSuccess(false);
         setFormState({ name: "", email: "", subject: "", message: "" });
@@ -157,7 +182,6 @@ function ContactForm() {
       transition={{ duration: 0.6 }}
       className="w-full"
     >
-      {/* SUCCESS MESSAGE */}
       <AnimatePresence>
         {isSuccess && (
           <motion.div
@@ -179,12 +203,11 @@ function ContactForm() {
       </AnimatePresence>
 
       <div className="space-y-6">
-        {/* NAME FIELD */}
+        {/* NAME */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className="relative"
         >
           <label className="block text-sm font-semibold text-slate-300 mb-2">
             Your Name <span className="text-red-400">*</span>
@@ -217,12 +240,11 @@ function ContactForm() {
           )}
         </motion.div>
 
-        {/* EMAIL FIELD */}
+        {/* EMAIL */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative"
         >
           <label className="block text-sm font-semibold text-slate-300 mb-2">
             Your Email <span className="text-red-400">*</span>
@@ -255,12 +277,11 @@ function ContactForm() {
           )}
         </motion.div>
 
-        {/* SUBJECT FIELD */}
+        {/* SUBJECT */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
-          className="relative"
         >
           <label className="block text-sm font-semibold text-slate-300 mb-2">
             Subject
@@ -272,18 +293,15 @@ function ContactForm() {
             onChange={handleChange}
             placeholder="Project Inquiry"
             className="w-full px-4 py-4 bg-slate-900 border border-slate-700 rounded-xl outline-none text-slate-100 placeholder-slate-500 focus:border-violet-500 transition-all"
-            whileFocus={{
-              boxShadow: "0 0 0 4px rgba(139, 92, 246, 0.1)",
-            }}
+            whileFocus={{ boxShadow: "0 0 0 4px rgba(139, 92, 246, 0.1)" }}
           />
         </motion.div>
 
-        {/* MESSAGE FIELD */}
+        {/* MESSAGE */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
-          className="relative"
         >
           <label className="block text-sm font-semibold text-slate-300 mb-2">
             Your Message <span className="text-red-400">*</span>
@@ -319,7 +337,7 @@ function ContactForm() {
           </p>
         </motion.div>
 
-        {/* SUBMIT BUTTON */}
+        {/* SUBMIT */}
         <motion.button
           type="submit"
           disabled={isSubmitting}
@@ -373,9 +391,7 @@ function FAQItem({ faq, index }) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-6 py-5 flex items-center justify-between text-left"
       >
-        <span className="font-semibold text-slate-200 pr-4">
-          {faq.question}
-        </span>
+        <span className="font-semibold text-slate-200 pr-4">{faq.question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -407,30 +423,15 @@ function FAQItem({ faq, index }) {
 // MAIN CONTACT PAGE COMPONENT
 // ========================================
 export default function Contact() {
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   return (
     <div className="contact-page bg-slate-950 text-slate-100">
       {/* ==================== 1. HERO SECTION ==================== */}
       <section className="contact-hero min-h-[70vh] relative flex items-center overflow-hidden pt-20">
-        {/* Spline Background - Only on Desktop */}
-        {!isMobile && (
-          <div className="spline-bg absolute inset-0 pointer-events-none opacity-10">
-            <Suspense fallback={null}>
-              <Spline scene={splineScenes.contact} />
-            </Suspense>
-          </div>
-        )}
+        {/* Decorative Background */}
+        <HeroBackground />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/80 pointer-events-none" />
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10 py-20">
           <motion.div
@@ -495,7 +496,6 @@ export default function Contact() {
 
               {/* Contact Cards */}
               <div className="space-y-4">
-                {/* Email */}
                 <motion.a
                   variants={item}
                   href={`mailto:${contactInfo.email.primary}`}
@@ -513,7 +513,6 @@ export default function Contact() {
                   </div>
                 </motion.a>
 
-                {/* Phone / WhatsApp */}
                 <motion.a
                   variants={item}
                   href={`tel:${contactInfo.phone.number}`}
@@ -531,7 +530,6 @@ export default function Contact() {
                   </div>
                 </motion.a>
 
-                {/* Upwork */}
                 <motion.a
                   variants={item}
                   href={contactInfo.upwork.url}
@@ -602,7 +600,9 @@ export default function Contact() {
             <div className="lg:col-span-3">
               <div className="bg-slate-950/50 backdrop-blur border border-slate-800 rounded-2xl p-8 lg:p-10">
                 <div className="mb-8">
-                  <h2 className="text-3xl font-bold mb-2">Send Me a Message</h2>
+                  <h2 className="text-3xl font-bold mb-2">
+                    Send Me a Message
+                  </h2>
                   <p className="text-slate-400">
                     Fill out the form below and I'll get back to you as soon as
                     possible.
@@ -643,8 +643,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
-      {/* ==================== 4. MAP OR ADDITIONAL CTA ==================== */}
     </div>
   );
 }

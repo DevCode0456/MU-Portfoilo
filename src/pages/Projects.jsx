@@ -1,8 +1,7 @@
 // src/pages/Projects.jsx
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { lazy, Suspense, useState, useEffect, useMemo } from 'react';
-import { splineScenes } from '../data/portfolioData';
+import { useState, useMemo } from 'react';
 import { projects } from '../data/projects';
 import {
   FiSearch,
@@ -16,8 +15,9 @@ import {
   FiStar,
 } from 'react-icons/fi';
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
-
+// ========================================
+// FRAMER MOTION VARIANTS
+// ========================================
 const container = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -28,20 +28,80 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+// ========================================
+// DECORATIVE BACKGROUND COMPONENT
+// ========================================
+function HeroBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full opacity-20"
+        style={{
+          background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)',
+          filter: 'blur(70px)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-15"
+        style={{
+          background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[250px] rounded-full opacity-10"
+        style={{
+          background: 'radial-gradient(ellipse, #eab308 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(139,92,246,0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(139,92,246,0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Floating dots */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-violet-400"
+          style={{
+            width: (i % 3) + 2,
+            height: (i % 3) + 2,
+            left: `${8 + i * 9}%`,
+            top: `${20 + (i % 4) * 20}%`,
+            opacity: 0.25 + (i % 3) * 0.12,
+          }}
+          animate={{ y: [0, -16, 0], opacity: [0.25, 0.5, 0.25] }}
+          transition={{
+            duration: 3 + (i % 3),
+            repeat: Infinity,
+            delay: i * 0.3,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ========================================
+// MAIN COMPONENT
+// ========================================
 export default function Projects() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedTech, setSelectedTech] = useState('All');
   const [viewMode, setViewMode] = useState('grid');
   const [sortBy, setSortBy] = useState('featured');
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const categories = ['All', ...new Set(projects.map((p) => p.category))];
   const allTechnologies = ['All', ...new Set(projects.flatMap((p) => p.technologies.map((t) => t.name)))];
@@ -93,15 +153,9 @@ export default function Projects() {
     <div className="projects-page bg-slate-950 text-slate-100 overflow-x-hidden">
       {/* ==================== 1. HERO SECTION ==================== */}
       <section className="projects-hero min-h-[50vh] sm:min-h-[60vh] relative flex items-center overflow-hidden pt-20">
-        {!isMobile && (
-          <div className="spline-bg absolute inset-0 pointer-events-none opacity-10">
-            <Suspense fallback={null}>
-              <Spline scene={splineScenes.projects} />
-            </Suspense>
-          </div>
-        )}
+        <HeroBackground />
 
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/90 to-slate-950/95 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/80 pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 py-10 sm:py-16 lg:py-20">
           <motion.div
@@ -165,7 +219,6 @@ export default function Projects() {
           <div className="flex flex-col gap-4 sm:gap-6">
             {/* Search + View Toggle Row */}
             <div className="flex gap-3">
-              {/* Search Bar */}
               <div className="flex-1 relative">
                 <FiSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <input
@@ -185,7 +238,6 @@ export default function Projects() {
                 )}
               </div>
 
-              {/* View Mode Toggle */}
               <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl p-1 shrink-0">
                 <button
                   onClick={() => setViewMode('grid')}
@@ -210,7 +262,7 @@ export default function Projects() {
               </div>
             </div>
 
-            {/* Category Filter - Horizontal scroll on mobile */}
+            {/* Category Filter */}
             <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-none">
               {categories.slice(0, 5).map((category) => (
                 <motion.button
