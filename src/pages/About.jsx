@@ -187,7 +187,7 @@ export default function About() {
             >
               {[
                 { icon: <FiCode />, value: "20+", label: "Projects" },
-                { icon: <FiTrendingUp />, value: "2+", label: "Years Exp" },
+                { icon: <FiTrendingUp />, value: "2+", label: "Years Experience" },
                 { icon: <FiUsers />, value: "200K+", label: "Users" },
                 { icon: <FiAward />, value: "98%", label: "Satisfaction" },
               ].map((stat, index) => (
